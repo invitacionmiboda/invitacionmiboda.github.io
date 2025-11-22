@@ -469,9 +469,9 @@
                         `BODA%0A` +
                         `Confirmación de asistencia:%0A` +
                         `Nombre: ${name}%0A` +
-                        `Asistencia: ${attending}%0A` +
-                        `Invitados: ${guests}`;
-
+                        `Asistencia: ${attending}%0A`;
+                    if(attendYes.checked){
+                        message += `Invitados: ${guests}`;
                     const url = `https://wa.me/${phone}?text=${message}`;
 
                     window.open(url, "_blank");
