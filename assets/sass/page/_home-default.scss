@@ -807,7 +807,7 @@
 	position: relative;
 	z-index: 1;
 	overflow: hidden;
-	background-attachment: fixed !important;
+	//background-attachment: fixed !important;
 
 	&:before {
 		position: absolute;
@@ -1356,4 +1356,105 @@
 
 		}
 	}
+}
+
+
+@media (min-width: 992px) {
+	.wpo-event-section .wpo-event-item,
+	.wpo-event-section-s2 .wpo-event-item {
+		max-width: 820px !important;
+		margin-bottom: 80px !important;
+	}
+
+	.dress-code{
+		max-width: 800px !important;
+	}
+}
+
+@media (max-width: 1199px) {
+    .dress-code {
+        max-width: 400px !important;
+    }
+}
+
+.navbar-header {
+    text-align: center !important;
+}
+
+.navbar-brand.logo {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    float: none !important;
+    display: block !important;
+}
+
+.mb-30 { margin-bottom:30px; }
+
+.none-border-bottom {
+	border-bottom: none !important;
+}
+
+.warnin-confirmation-msg{
+	display:none;
+	background-color: #b9ab00; 
+	border-left: #b9ab00; 
+	margin-bottom: 5px;
+	font-size: 15px;
+	width: 100%;
+	color: #fff;
+	padding: 5px 10px;
+	text-align: center;
+	box-sizing: border-box;
+	unicode-bidi: isolate;
+}
+
+.margin-bottom-10 {
+	margin-bottom: 10px !important;
+}
+
+.margin-bottom-15 {
+	margin-bottom: 15px !important;
+}
+
+.font-size-xxl {
+	font-size: xx-large !important;
+}
+
+.gift-description {
+	font-size:18px; 
+	margin-bottom:50px;
+}
+
+.padding-bottom-32 {
+	padding-bottom: 32px !important;
+}
+
+.background-color-black {
+	background-color: #000 !important;
+}
+
+/* Fondo fijo universal, queda atrás de todo */
+.parallax-fixed-bg {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    //background-image: url('../images/rsvp-bg.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    z-index: -1 !important; /* detrás de todo */
+}
+
+/* La sección solo se mueve encima */
+.section-content-parallaxeable {
+    position: relative !important;
+    z-index: 2 !important;
+    background: transparent !important;
+}
+
+.section-content {
+	background-color: #fff;
+	margin-top: -1px !important;
 }

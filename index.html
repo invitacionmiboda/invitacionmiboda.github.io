@@ -40,10 +40,11 @@
     <link href="assets/css/owl.transitions.css" rel="stylesheet">
     <link href="assets/css/jquery.fancybox.css" rel="stylesheet">
     <link href="assets/css/odometer-theme-default.css" rel="stylesheet">
-    <link href="assets/sass/style.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
 <body>
+    <div class="parallax-fixed-bg"></div>
 
     <!-- start page-wrapper -->
     <div class="page-wrapper">
@@ -62,7 +63,7 @@
         <!-- end preloader -->
 
         <!-- Start header -->
-        <header id="header">
+        <header id="header section-content">
             <div class="wpo-site-header wpo-site-header-s1">
                 <nav class="navigation navbar navbar-expand-lg navbar-light">
                     <div class="container-fluid">
@@ -84,7 +85,7 @@
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <div class="col-xl-8 col-lg-6 col-12">
-                        <div class="wpo-static-hero-inner" style="display: none;">
+                        <div class="wpo-static-hero-inner d-none">
                         </div>
                     </div>
                 </div>
@@ -125,37 +126,8 @@
         </section>
         <!-- end of hero slider -->
 
-        <!-- start wpo-partners-section -->
-        <section class="wpo-partners-section section-padding">
-            <h2 class="hidden">Partners</h2>
-            <div class="container">
-                <div class="row">
-                    <div class="col col-xs-12">
-                        <div class="partner-grids partners-slider owl-carousel" style="display: none;">
-                            <div class="grid">
-                                <img src="assets/images/partners/1.png" alt="">
-                            </div>
-                            <div class="grid">
-                                <img src="assets/images/partners/2.png" alt="">
-                            </div>
-                            <div class="grid">
-                                <img src="assets/images/partners/3.png" alt="">
-                            </div>
-                            <div class="grid">
-                                <img src="assets/images/partners/4.png" alt="">
-                            </div>
-                            <div class="grid">
-                                <img src="assets/images/partners/5.png" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- end container -->
-        </section>
-        <!-- end wpo-partners-section-->
-
         <!-- start wpo-couple-section -->
-        <section class="wpo-couple-section section-padding pt-0" id="couple">
+        <section class="wpo-couple-section section-padding section-content" id="couple">
             <div class="container">
                 <div class="couple-area clearfix">
                     <div class="row align-items-center">
@@ -163,7 +135,7 @@
                             <div class="text-grid wow fadeInLeftSlow" data-wow-duration="800ms">
                                 <h3>Fernanda</h3>
                                 <p>Ella no es solo una novia, sino una mujer de gracia, fortaleza y bondad. Con cada sonrisa, aporta calidez a quienes la rodean, y con cada paso, lleva el amor de su familia y amigos. Hoy, se encuentra radiante, una visión de belleza y esperanza, lista para comenzar el viaje de juntos para toda la vida. Su corazón rebosa de amor, su espiritu brilla con alegria y su historia continúa mientras camina de la mano hacia un nuevo capítulo de la vida.</p>
-                                <div class="social" style="display: none;">
+                                <div class="social d-none">
                                     <ul>
                                         <li><a href="#"><i class="ti-facebook"></i></a></li>
                                         <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
@@ -189,25 +161,12 @@
                             <div class="text-grid wow fadeInRightSlow" data-wow-duration="800ms">
                                 <h3>Jorge</h3>
                                 <p>Él no es solo un novio, sino un hombre de devoción, fuerza y sinceridad. Con cada palabra, ofrece consuelo, y con cada acción, demuestra su amor inquebrantable. Hoy, se encuentra con orgullo y alegría, listo para honrar los votos de para toda la vida. Su corazón late con gratitud, su espíritu brilla con esperanza, y su historia continúa mientras toma la mano de su amada para caminar juntos hacia un nuevo capítulo de la vida.</p>
-                                <div class="social" style="display: none;">
+                                <div class="social d-none">
                                     <ul>
                                         <li><a href="#"><i class="ti-facebook"></i></a></li>
                                         <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
                                         <li><a href="#"><i class="ti-instagram"></i></a></li>
                                     </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col col-xl-6 col-lg-4 col-12">
-                            <div class="middle-couple-pic-wrap">
-                                <div class="middle-couple-pic wow zoomIn" data-wow-duration="1000ms">
-                                    <div class="middle-couple-pic-inner"
-                                        style="mask-image: url(./assets/images/couple/shape.png); -webkit-mask-image: url(./assets/images/couple/shape.png);">
-                                        <img src="assets/images/couple/2.jpg" alt="">
-                                    </div>
-                                    <div class="bottom-shadow">
-                                        <img src="assets/images/couple/shadow.png" alt="">
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -217,14 +176,8 @@
         </section>
         <!-- end wpo-couple-section -->
 
-        <!-- start wpo-video-section -->
-        <section class="wpo-video-section" style="display: none;">
-            <h2 class="hidden">some</h2>
-        </section>
-        <!-- end wpo-video-section-->
-
         <!-- start wpo-story-section -->
-        <section class="wpo-story-section section-padding" id="story">
+        <section class="wpo-story-section section-padding section-content" id="story">
             <div class="container">
                 <div class="wpo-section-title">
                     <span>Nuestra historia comienza en</span>
@@ -242,7 +195,7 @@
                         </div>
                         <div class="wpo-story-content">
                             <div class="wpo-story-content-inner wow fadeInRightSlow" data-wow-duration="1700ms">
-                                <span style="display: none;">15 June, 2014</span>
+                                <span class="d-none">15 June, 2014</span>
                                 <h2>Como nos conocimos</h2>
                                 <p>Todo empezó en el trabajo, donde la vida decidió cruzar nuestros caminos.</p>
                             </div>
@@ -259,7 +212,7 @@
                         </div>
                         <div class="wpo-story-content">
                             <div class="wpo-story-content-inner wow fadeInLeftSlow" data-wow-duration="1700ms">
-                                <span style="display: none;">02 Nov, 2020</span>
+                                <span class="d-none">02 Nov, 2020</span>
                                 <h2>Nuestro "para toda la vida" comienza</h2>
                                 <p>El momento en que el amor se selló con un anillo, y dos corazones eligieron la eternidad.</p>
                             </div>
@@ -271,15 +224,15 @@
         <!-- end story-section -->
 
         <!-- start UBICACIONES-section -->
-        <section class="wpo-event-section section-padding" id="event">
+        <section class="wpo-event-section section-padding section-content" id="event">
             <div class="container">
-                <div class="wpo-section-title" style="margin-bottom: 30px;">
+                <div class="wpo-section-title mb-30">
                     <span>Nuestra boda</span>
                     <h2>Dónde y cuándo</h2>
                 </div>
                 <div class="wpo-event-wrap">
                     <div class="row">
-                        <div class="col col-lg-6 col-md-6 col-12">
+                        <div class="col col-12">
                             <div class="wpo-event-item wow fadeInUp" data-wow-duration="1200ms">
                                 <div class="wpo-event-img">
                                     <div class="wpo-event-img-inner">
@@ -304,7 +257,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col col-lg-6 col-md-6 col-12">
+                        <div class="col col-12">
                             <div class="wpo-event-item wow fadeInUp" data-wow-duration="1400ms">
                                 <div class="wpo-event-img">
                                     <div class="wpo-event-img-inner">
@@ -337,7 +290,7 @@
         <!-- end UBICACIONES-section -->
 
         <!-- start Dress Code section -->
-        <section class="wpo-event-section section-padding" id="dresscode">
+        <section class="wpo-event-section section-padding section-content" id="dresscode">
             <div class="container">
 
                 <div class="wpo-event-wrap">
@@ -346,17 +299,23 @@
                         <div class="col col-lg-8 col-md-10 col-12">
                             <div class="wpo-event-item wow fadeInUp" data-wow-duration="1200ms">
                                 
-                                <div class="wpo-event-text" style="text-align:center;">
-                                    <div class="wpo-section-title" style="margin-bottom: 30px;">
+                                <div class="wpo-event-text dress-code text-center">
+                                    <div class="wpo-section-title mb-30">
                                         <span>Detalles importantes</span>
-                                        <h2 style="border-bottom: none;">Código de vestimenta</h2>
+                                        <h2 class="none-border-bottom">Código de vestimenta</h2>
                                     </div>
                                     <div class="wpo-team-text">
-                                        <strong>Hombres:</strong><br>
-                                        <span>Formal o vaquero.</span><br><br>
+                                        <div class="row text-center">
+                                            <div class="col col-lg-6 col-md-6 col-12">
+                                                <strong>Hombres:</strong><br>
+                                                <span>Formal o vaquero.</span><br><br>
+                                            </div>
 
-                                        <strong>Mujeres:</strong><br>
-                                        <span>Vestido.</span><br><br>
+                                            <div class="col col-lg-6 col-md-6 col-12">
+                                                <strong>Mujeres:</strong><br>
+                                                <span>Vestido.</span><br><br>
+                                            </div>
+                                        </div>
 
                                         <strong>Por favor evita los colores:</strong><br>
                                         <span>Blanco e ivory (reservados para la novia)</span><br>
@@ -376,11 +335,11 @@
         </section>
         <!-- end Dress Code section -->
 
-
         <!-- start of CONFIRMACION DE ASISTENCIA-section -->
-        <section class="wpo-contact-section section-padding"
-            style="background: url(./assets/images/rsvp-bg.jpg) no-repeat center center;  background-size: cover;"
-            id="RSVP">
+        <section class="wpo-contact-section section-padding section-content-parallaxeable"
+                 data-bg="assets/images/rsvp-bg.jpg" 
+                 id="RSVP">
+            
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col col-lg-12 col-md-12 col-12">
@@ -441,23 +400,15 @@
                                         </div>
 
                                         <div class="clearfix error-handling-messages">
-                                            <div id="success">Gracias por confirmar!</div>
-                                            <div id="warning" 
-                                                 style="display:none;
-                                                        background-color: #b9ab00; 
-                                                        border-left: #b9ab00; 
-                                                        margin-bottom: 5px;
-                                                        font-size: 15px;
-                                                        width: 100%;
-                                                        color: #fff;
-                                                        padding: 5px 10px;
-                                                        text-align: center;
-                                                        box-sizing: border-box;
-                                                        unicode-bidi: isolate;
-                                                        ">
-                                                    Por favor, selecciona el número de invitados.
+                                            <div id="success">
+                                                Gracias por confirmar!
                                             </div>
-                                            <div id="error">Ocurrió un error al enviar el mensaje.</div>
+                                            <div id="warning" class="warnin-confirmation-msg">
+                                                Por favor, selecciona el número de invitados.
+                                            </div>
+                                            <div id="error">
+                                                Ocurrió un error al enviar el mensaje.
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -504,7 +455,7 @@
                 const attending = attendYes.checked ? "Sí asistiré" : "No asistiré";
                 const guests = guestSelect.value;
 
-                if(guests != "Número de invitados" && guests != "" && guests != null){
+                if(attendNo.checked || (guests != "Número de invitados" && guests != "" && guests != null)){
                     // Mensaje éxito local
                     successMsg.style.display = "block";
                     warningMsg.style.display = "none";
@@ -544,18 +495,18 @@
         <!-- end of CONFIRMACION DE ASISTENCIA-section -->
 
         <!-- start Gifts section -->
-        <section class="wpo-event-section section-padding" id="gifts">
+        <section class="wpo-event-section section-padding section-content" id="gifts">
             <div class="container">
 
                 <!-- Texto general -->
-                <div class="wpo-section-title" style="margin-bottom:10px;">
-                    <span><i class="fas fa-gift" style="font-size: xx-large;"></i></span>
+                <div class="wpo-section-title margin-bottom-10">
+                    <span><i class="fas fa-gift font-size-xxl"></i></span>
                     <h2>Regalos</h2>
                 </div>
 
                 <div class="row justify-content-center">
                     <div class="col col-lg-8 col-md-10 col-12">
-                        <p style="text-align:center; font-size:18px; margin-bottom:50px;">
+                        <p class="text-center gift-description">
                             El mejor regalo es tu presencia, pero si deseas brindarnos un detalle adicional, te dejamos aquí algunas opciones.
                         </p>
                     </div>
@@ -568,10 +519,10 @@
                         <div class="col col-lg-8 col-md-10 col-12">
                             <div class="wpo-event-item wow fadeInUp" data-wow-duration="1200ms">
                                 <div class="wpo-section-title">
-                                    <span><i class="fas fa-credit-card" style="font-size: xx-large;"></i></span>
-                                    <h2 style="padding-bottom: 32px;">Transferencia Bancaria</h2>
+                                    <span><i class="fas fa-credit-card font-size-xxl"></i></span>
+                                    <h2 class="padding-bottom-32">Transferencia Bancaria</h2>
                                 </div>
-                                <div class="wpo-event-text" style="text-align:center;">
+                                <div class="wpo-event-text text-center">
                                     <p>
                                         Tarjeta BBVA<br> 
                                         <b>4152 3140 3028 8016</b><br>
@@ -585,10 +536,10 @@
                         <div class="col col-lg-8 col-md-10 col-12">
                             <div class="wpo-event-item wow fadeInUp" data-wow-duration="1200ms">
                                 <div class="wpo-section-title">
-                                    <span><i class="fas fa-envelope-open-text" style="font-size: xx-large;"></i></span>
-                                    <h2 style="padding-bottom: 32px;">Lluvia de sobres</h2>
+                                    <span><i class="fas fa-envelope-open-text font-size-xxl"></i></span>
+                                    <h2 class="padding-bottom-32">Lluvia de sobres</h2>
                                 </div>
-                                <div class="wpo-event-text" style="text-align:center;">
+                                <div class="wpo-event-text text-center">
                                     <p>
                                         También puedes hacerlo a través de un sobre el día del evento.
                                     </p>
@@ -597,16 +548,16 @@
                         </div>
 
                         <!-- Mesa de regalos Amazon -->
-                        <div class="col col-lg-8 col-md-10 col-12" style="display: none;">
+                        <div class="col col-lg-8 col-md-10 col-12 d-none">
                             <div class="wpo-event-item wow fadeInUp" data-wow-duration="1200ms">
                                 <div class="wpo-section-title">
-                                    <span><i class="fab fa-amazon" style="font-size: xx-large;"></i></span>
-                                    <h2 style="padding-bottom: 32px;">Mesa de regalos Amazon</h2>
+                                    <span><i class="fab fa-amazon font-size-xxl"></i></span>
+                                    <h2 class="padding-bottom-32">Mesa de regalos Amazon</h2>
                                 </div>
-                                <div class="wpo-event-text" style="text-align:center;">
+                                <div class="wpo-event-text text-center">
                                     <p>
                                         Además contamos con mesa de regalos.
-                                        <a href="#" class="theme-btn" style="margin-top:15px;">Ver mesa de regalos</a>
+                                        <a href="#" class="theme-btn margin-bottom-15">Ver mesa de regalos</a>
                                     </p>
                                 </div>
                             </div>
@@ -621,7 +572,7 @@
 
 
         <!-- start wpo-story-section -->
-        <section class="wpo-story-section section-padding" id="story2">
+        <section class="wpo-story-section section-padding section-content" id="story2">
             <div class="container">
                 <div class="wpo-story-wrap">
                     <div class="wpo-story-item">
@@ -635,7 +586,7 @@
                         </div>
                         <div class="wpo-story-content">
                             <div class="wpo-story-content-inner wow fadeInRightSlow" data-wow-duration="1700ms">
-                                <span style="display: none;">15 Apr, 2021</span>
+                                <span class="d-none">15 Apr, 2021</span>
                                 <h2>Un instante que lo cambió todo</h2>
                                 <p>Hay momentos que parecen simples, pero terminan marcando el rumbo de una vida. 
                                     Así, sin prisa y sin ruido, llegó el nuestro: un encuentro que se convirtió en destino.</p>
@@ -648,22 +599,20 @@
         <!-- end story-section -->
 
         <!-- start wpo-cta-section -->
-        <div class="wpo-cta-section" style="background-color: black;">
-            <div class="container-fluid">
-                <div class="wpo-cta-item">
-                    <h2>No Podemos Esperar Para Verte</h2>
-                    <p>Será un honor inmenso compartir este gran día contigo. Tu presencia hará nuestro momento aún más especial.</p>
-                    <a class="theme-btn-s2" href="rsvp.html" style="display: none;">RSVP</a>
-                </div>
+        <div class="wpo-cta-section section-content section-content-parallaxeable"
+             data-bg="assets/images/portfolio/11.jpg" >            
+            <div class="wpo-cta-item">
+                <h2>No Podemos Esperar Para Verte</h2>
+                <p>Será un honor inmenso compartir este gran día contigo. Tu presencia hará nuestro momento aún más especial.</p>
             </div>
         </div>
         <!-- end wpo-cta-section -->
 
         <!-- start wpo-team-section -->
-        <section class="wpo-team-section pt-0 section-padding">
+        <section class="wpo-team-section pt-0 section-padding section-content" id="team">
             <div class="container">
-                <div class="wpo-section-title" style="margin-bottom: 15px;">
-                    <span style="display: none;">Our Organizers</span>
+                <div class="wpo-section-title margin-bottom-15">
+                    <span class="d-none">Our Organizers</span>
                     <br>
                     <br>
                     <br>
@@ -698,12 +647,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="wpo-section-title" style="margin-bottom: 15px;">
+                <div class="wpo-section-title margin-bottom-15">
                     <br>
                     <br>
                     <br>
                     <br>
-                    <span style="display: none;">Our Organizers</span>
+                    <span class="d-none">Our Organizers</span>
                     <h2>Padrinos</h2>
                 </div>
                 <div class="wpo-team-wrap">
@@ -734,11 +683,11 @@
         <!-- end wpo-team-section -->
 
         <!-- start GALERIA-section -->
-        <section class="wpo-portfolio-section section-padding pt-0" id="gallery">
+        <section class="wpo-portfolio-section section-padding pt-0 section-content" id="gallery">
             <h2 class="d-none">hidden</h2>
             <div class="container">
-                <div class="wpo-section-title" style="margin-bottom: 30px;">
-                    <span style="display: none;">Our Organizers</span>
+                <div class="wpo-section-title .mb-30">
+                    <span class="d-none">Our Organizers</span>
                     <br>
                     <br>
                     <br>
@@ -982,43 +931,68 @@
     <script src="assets/js/jquery-plugin-collection.js"></script>
     <!-- Custom script for this template -->
     <!--<script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const form = document.getElementById("contact-form-main");
+        document.addEventListener("DOMContentLoaded", () => {
 
-            form.addEventListener("submit", async function (e) {
-                e.preventDefault();
+            const fixedBg = document.querySelector(".parallax-fixed-bg");
+            const sections = document.querySelectorAll(".section-content-parallaxeable");
 
-                const name = document.querySelector("#name").value;
-                const attending = document.querySelector("input[name='asistencia']:checked").id === "attend" ? "Sí" : "No";
-                const guests = document.querySelector("select[name='guest']").value;
-
-                const data = {
-                    Nombre: name,
-                    Asistirá: attending,
-                    Invitados: guests
-                };
-
-                const formSubmitURL = "https://formsubmit.co/TU_CORREO_AQUI";
-
-                const response = await fetch(formSubmitURL, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    },
-                    body: JSON.stringify(data)
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target.dataset.bg;
+                        fixedBg.style.backgroundImage = `url('${img}')`;
+                    }
                 });
-
-                if (response.ok) {
-                    document.getElementById("success").style.display = "block";
-                    form.reset();
-                } else {
-                    document.getElementById("error").style.display = "block";
-                }
+            }, {
+                threshold: 0.01  // cambia la imagen cuando 10% de la sección es visible
             });
-        });
-    </script> -->
 
+            sections.forEach(sec => io.observe(sec));
+
+        });
+    </script>-->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            const fixedBg = document.querySelector(".parallax-fixed-bg");
+            const sections = document.querySelectorAll(".section-content-parallaxeable");
+
+            // Pre-cargar TODAS las imágenes para evitar parpadeos
+            const cache = {};
+            sections.forEach(sec => {
+                const img = sec.dataset.bg;
+                const preload = new Image();
+                preload.src = img;
+                cache[img] = preload;
+            });
+
+            // Observer para detectar cuando una sección entra al viewport
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+
+                        const img = entry.target.dataset.bg;
+
+                        // Solo cambia cuando la imagen ya está cargada → CERO flash
+                        if (cache[img].complete) {
+                            fixedBg.style.backgroundImage = `url('${img}')`;
+                        } else {
+                            // Como fallback: cuando cargue, cambia
+                            cache[img].onload = () => {
+                                fixedBg.style.backgroundImage = `url('${img}')`;
+                            };
+                        }
+                    }
+                });
+            }, {
+                threshold: 0,           // puedes dejarlo en 0
+                rootMargin: "200px 0px" // ⚡ SE DISPARA 400px ANTES DE ENTRAR A PANTALLA
+            });
+
+            sections.forEach(sec => io.observe(sec));
+
+        });
+    </script>
 
     <script src="assets/js/script.js"></script>
 </body>
