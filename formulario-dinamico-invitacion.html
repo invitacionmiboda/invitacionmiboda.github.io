@@ -70,21 +70,31 @@
 		{
 		  "templateId": "BODA-001",
 		  "templateName": "Invitación Jorge & Fernanda",
+      "eventId": "7d66f8da-8545-4447-9fd1-cb3bf87ec029",
+      "eventName": "Jorge & Fernanda",
 		  "sections": [
 			{
 			  "type": "SECTION",
-			  "code": "TITLE",
-			  "name": "Título de la invitación",
+			  "code": "PORTADA",
+			  "name": "Portada de la invitación",
 			  "visible": true,
 			  "position": 1,
+
 			  "title": "Nos casamos",
+        "subtitle": "Reserva la fecha",
 			  "description": "Jorge & Fernanda",
+        "date": "2025-12-06 16:00:00",
+        "foto": "assets/images/slider/shape.png",
+
 			  "controls": [
-				{ "name": "SECTION_TITLE_TITLE", "label": "Título principal", "type": "textbox", "required": true, "maxLength": 50 },
-				{ "name": "SECTION_TITLE_DESCRIPTION", "label": "Subtítulo", "type": "textbox", "required": true, "maxLength": 50 }
+				{ "name": "SECTION_PORTADA_TITLE", "label": "Título principal", "type": "textbox", "required": true, "maxLength": 50 },
+				{ "name": "SECTION_PORTADA_SUBTITLE", "label": "Subtítulo", "type": "textbox", "required": true, "maxLength": 50 },
+				{ "name": "SECTION_PORTADA_DESCRIPTION", "label": "Descripción", "type": "textbox", "required": true, "maxLength": 50 },
+        { "name": "SECTION_PORTADA_DATE", "label": "Fecha del evento", "type": "date", "required": true },
+				{ "name": "SECTION_PORTADA_FOTO", "label": "Foto de portada", "type": "file", "required": false }
 			  ]
 			},
-			{
+			/*{
 			  "type": "SECTION",
 			  "code": "COUNTDOWN",
 			  "name": "Cuenta regresiva",
@@ -94,35 +104,26 @@
 			  "controls": [
 				{ "name": "SECTION_COUNTDOWN_DATE", "label": "Fecha del evento", "type": "date", "required": true }
 			  ]
-			},
+			},*/
 			{
 			  "type": "SECTION",
-			  "code": "INFO-NOVIA",
-			  "name": "Información de la novia",
+			  "code": "INFO-NOVIA-NOVIO",
+			  "name": "Información de los novios",
 			  "visible": true,
 			  "position": 3,
-			  "title": "Fernanda",
-			  "description": "Descripción de la novia",
-			  "foto": "",
+
+			  "title-novia": "Fernanda",
+			  "description-novia": "Ella no es solo una novia, sino una mujer de gracia, fortaleza y bondad. Con cada sonrisa, aporta calidez a quienes la rodean, y con cada paso, lleva el amor de su familia y amigos. Hoy, se encuentra radiante, una visión de belleza y esperanza, lista para comenzar el viaje de juntos para toda la vida. Su corazón rebosa de amor, su espiritu brilla con alegria y su historia continúa mientras camina de la mano hacia un nuevo capítulo de la vida.",
+			  "foto": "assets/images/portfolio/7.jpg",
+        "title-novio": "Jorge",
+        "description-novio": "Él no es solo un novio, sino un hombre de devoción, fuerza y sinceridad. Con cada palabra, ofrece consuelo, y con cada acción, demuestra su amor inquebrantable. Hoy, se encuentra con orgullo y alegría, listo para honrar los votos de para toda la vida. Su corazón late con gratitud, su espíritu brilla con esperanza, y su historia continúa mientras toma la mano de su amada para caminar juntos hacia un nuevo capítulo de la vida.",
+        
 			  "controls": [
-				{ "name": "SECTION_INFO-NOVIA_TITLE", "label": "Nombre de la novia", "type": "textbox", "required": true, "maxLength": 80 },
-				{ "name": "SECTION_INFO-NOVIA_DESCRIPTION", "label": "Descripción de la novia", "type": "textarea", "required": false, "maxLength": 500 },
-				{ "name": "SECTION_INFO-NOVIA_FOTO", "label": "Foto de la novia", "type": "file", "required": false }
-			  ]
-			},
-			{
-			  "type": "SECTION",
-			  "code": "INFO-NOVIO",
-			  "name": "Información del novio",
-			  "visible": true,
-			  "position": 4,
-			  "title": "Jorge",
-			  "description": "Descripción del novio",
-			  "foto": "",
-			  "controls": [
-				{ "name": "SECTION_INFO-NOVIO_TITLE", "label": "Nombre del novio", "type": "textbox", "required": true, "maxLength": 80 },
-				{ "name": "SECTION_INFO-NOVIO_DESCRIPTION", "label": "Descripción del novio", "type": "textarea", "required": false, "maxLength": 500 },
-				{ "name": "SECTION_INFO-NOVIO_FOTO", "label": "Foto del novio", "type": "file", "required": false }
+				{ "name": "SECTION_INFO-NOVIA-NOVIO_TITLE-NOVIA", "label": "Nombre de la novia", "type": "textbox", "required": true, "maxLength": 80 },
+				{ "name": "SECTION_INFO-NOVIA-NOVIO_DESCRIPTION-NOVIA", "label": "Descripción de la novia", "type": "textarea", "required": false, "maxLength": 500 },
+				{ "name": "SECTION_INFO-NOVIA-NOVIO_FOTO", "label": "Foto de la novia", "type": "file", "required": false },
+        { "name": "SECTION_INFO-NOVIA-NOVIO_TITLE-NOVIO", "label": "Nombre del novio", "type": "textbox", "required": true, "maxLength": 80 },
+        { "name": "SECTION_INFO-NOVIA-NOVIO_DESCRIPTION-NOVIO", "label": "Descripción del novio", "type": "textarea", "required": false, "maxLength": 500 }
 			  ]
 			},
 			{
@@ -131,13 +132,27 @@
 			  "name": "Nuestra historia",
 			  "visible": true,
 			  "position": 5,
-			  "subtitulo": "Cómo nos conocimos",
-			  "texto": "Aquí irá la historia...",
-			  "fotos": [],
+
+        "titulo0": "Nuestra historia comienza en",
+        "subtitulo0": "2021",
+			  "titulo1": "Como nos conocimos",
+			  "subtitulo1": "Todo empezó en el trabajo, donde la vida decidió cruzar nuestros caminos.",
+			  "foto1": "assets/images/story/1.jpg",
+        "titulo2": "Nuestro \"para toda la vida\" comienza",
+        "subtitulo2": "El momento en que el amor se selló con un anillo y dos corazones eligieron la eternidad.",
+        "foto2": "assets/images/story/2.jpg",
+
 			  "controls": [
-				{ "name": "SECTION_HISTORIA_SUBTITULO", "label": "Subtítulo de la historia", "type": "textbox", "required": true, "maxLength": 100 },
-				{ "name": "SECTION_HISTORIA_TEXTO", "label": "Texto de la historia", "type": "textarea", "required": false, "maxLength": 1000 },
-				{ "name": "SECTION_HISTORIA_FOTOS", "label": "Fotos de la historia", "type": "file-multiple", "required": false }
+				{ "name": "SECTION_HISTORIA_TITULO0", "label": "Título de la sección", "type": "textbox", "required": true, "maxLength": 100 },
+				{ "name": "SECTION_HISTORIA_SUBTITULO0", "label": "Subtítulo de la sección", "type": "textarea", "required": false, "maxLength": 100 },
+
+				{ "name": "SECTION_HISTORIA_TITULO1", "label": "Título 1", "type": "textarea", "required": false, "maxLength": 100 },
+        { "name": "SECTION_HISTORIA_SUBTITULO1", "label": "Subtítulo 1", "type": "textarea", "required": false, "maxLength": 300 },
+				{ "name": "SECTION_HISTORIA_FOTO1", "label": "Fotos de la historia", "type": "file", "required": false },
+        
+        { "name": "SECTION_HISTORIA_TITULO2", "label": "Título 2", "type": "textarea", "required": false, "maxLength": 100 },
+        { "name": "SECTION_HISTORIA_SUBTITULO2", "label": "Subtítulo 2", "type": "textarea", "required": false, "maxLength": 300 },
+        { "name": "SECTION_HISTORIA_FOTO2", "label": "Fotos de la historia", "type": "file", "required": false }
 			  ]
 			},
 			{
@@ -146,19 +161,38 @@
 			  "name": "Dónde y cuándo",
 			  "visible": true,
 			  "position": 6,
-			  "ceremonia_lugar": "Nuestra Señora de Fátima",
-			  "ceremonia_hora": "16:00",
-			  "ceremonia_mapa": "",
-			  "recepcion_lugar": "Campestre Monsal",
-			  "recepcion_hora": "21:00",
-			  "recepcion_mapa": "",
+
+        "titulo": "Dónde y cuándo",
+        "subtitulo": "Nuestra boda",
+
+        "ceremonia-titulo": "Ceremonia religiosa",
+			  "ceremonia-lugar": "Nuestra Señora de Fátima",
+			  "ceremonia-hora": "4:00 PM - 5:00 PM",
+			  "ceremonia-mapa": "https://maps.app.goo.gl/n635Tae4DocMsmcr5",
+        "ceremonia-foto": "assets/images/event/2.jpg",
+
+        "recepcion-titulo": "Recepción",
+			  "recepcion-lugar": "Campestre Monsal",
+			  "recepcion-hora": "9:00 PM - 2:00 AM",
+			  "recepcion-mapa": "https://maps.app.goo.gl/zhUW5A5N85bACXPz9",
+        "recepcion-foto": "assets/images/event/3.jpg",
+
 			  "controls": [
-				{ "name": "SECTION_EVENTOS_CEREMONIA_LUGAR", "label": "Nombre del lugar de la ceremonia", "type": "textbox", "required": true },
-				{ "name": "SECTION_EVENTOS_CEREMONIA_HORA", "label": "Hora de la ceremonia", "type": "textbox", "required": true },
-				{ "name": "SECTION_EVENTOS_CEREMONIA_MAPA", "label": "Mapa de la ceremonia", "type": "textbox", "required": false },
-				{ "name": "SECTION_EVENTOS_RECEPCION_LUGAR", "label": "Nombre del lugar de la recepción", "type": "textbox", "required": true },
-				{ "name": "SECTION_EVENTOS_RECEPCION_HORA", "label": "Hora de la recepción", "type": "textbox", "required": true },
-				{ "name": "SECTION_EVENTOS_RECEPCION_MAPA", "label": "Mapa de la recepción", "type": "textbox", "required": false }
+
+        { "name": "SECTION_EVENTOS_TITULO", "label": "Título de la sección", "type": "textbox", "required": true, "maxLength": 100 },
+        { "name": "SECTION_EVENTOS_SUBTITULO", "label": "Subtítulo de la sección", "type": "textbox", "required": true, "maxLength": 100 },
+
+        { "name": "SECTION_EVENTOS_CEREMONIA-TITULO", "label": "Título de la ceremonia", "type": "textbox", "required": true, "maxLength": 100 },
+				{ "name": "SECTION_EVENTOS_CEREMONIA-LUGAR", "label": "Nombre del lugar de la ceremonia", "type": "textbox", "required": true, "maxLength": 100 },
+				{ "name": "SECTION_EVENTOS_CEREMONIA-HORA", "label": "Hora de la ceremonia", "type": "textbox", "required": true, "maxLength": 100 },
+				{ "name": "SECTION_EVENTOS_CEREMONIA-MAPA", "label": "Mapa de la ceremonia", "type": "textbox", "required": false, "maxLength": 100 },
+        { "name": "SECTION_EVENTOS_CEREMONIA-FOTO", "label": "Foto de la ceremonia", "type": "file", "required": false },
+
+        { "name": "SECTION_EVENTOS_RECEPCION-TITULO", "label": "Título de la recepción", "type": "textbox", "required": true, "maxLength": 100 },
+				{ "name": "SECTION_EVENTOS_RECEPCION-LUGAR", "label": "Nombre del lugar de la recepción", "type": "textbox", "required": true, "maxLength": 100 },
+				{ "name": "SECTION_EVENTOS_RECEPCION-HORA", "label": "Hora de la recepción", "type": "textbox", "required": true, "maxLength": 100 },
+				{ "name": "SECTION_EVENTOS_RECEPCION-MAPA", "label": "Mapa de la recepción", "type": "textbox", "required": false, "maxLength": 100 },
+        { "name": "SECTION_EVENTOS_RECEPCION-FOTO", "label": "Foto de la recepción", "type": "file", "required": false }
 			  ]
 			},
 			{
@@ -167,13 +201,35 @@
 			  "name": "Código de vestimenta",
 			  "visible": true,
 			  "position": 7,
+
+        "titulo": "Código de vestimenta",
+        "subtitulo": "Detalles importantes",
+
+        "hombres-titulo": "Hombres:",
 			  "hombres": "Formal o vaquero.",
+
+        "mujeres-titulo": "Mujeres:",
 			  "mujeres": "Vestido.",
-			  "colores": "Color blanco reservado para la novia",
+
+        "colores-titulo": "Por favor evita los colores:",
+			  "colores": "Blanco e ivory (reservados para la novia) Verde (reservado para las damas)",
+
+        "etiqueta-no-ninos": "Respetuosamente NO NIÑOS",
+
 			  "controls": [
-				{ "name": "SECTION_VESTIMENTA_HOMBRES", "label": "Vestimenta para hombres", "type": "textbox", "required": true },
-				{ "name": "SECTION_VESTIMENTA_MUJERES", "label": "Vestimenta para mujeres", "type": "textbox", "required": true },
-				{ "name": "SECTION_VESTIMENTA_COLORES", "label": "Colores permitidos", "type": "textarea", "required": false }
+        { "name": "SECTION_VESTIMENTA_TITULO", "label": "Título de la sección", "type": "textbox", "required": true, "maxLength": 100 },
+        { "name": "SECTION_VESTIMENTA_SUBTITULO", "label": "Subtítulo de la sección", "type": "textbox", "required": true, "maxLength": 100 },
+
+        { "name": "SECTION_VESTIMENTA_HOMBRES-TITULO", "label": "Título para vestimenta hombres", "type": "textbox", "required": true, "maxLength": 100 },
+				{ "name": "SECTION_VESTIMENTA_HOMBRES", "label": "Vestimenta para hombres", "type": "textbox", "required": true, "maxLength": 100 },
+
+        { "name": "SECTION_VESTIMENTA_MUJERES-TITULO", "label": "Título para vestimenta mujeres", "type": "textbox", "required": true, "maxLength": 100 },
+				{ "name": "SECTION_VESTIMENTA_MUJERES", "label": "Vestimenta para mujeres", "type": "textbox", "required": true, "maxLength": 100 },
+
+        { "name": "SECTION_VESTIMENTA_COLORES-TITULO", "label": "Título para colores", "type": "textbox", "required": true, "maxLength": 100 },
+				{ "name": "SECTION_VESTIMENTA_COLORES", "label": "Descripcion de colores permitidos y/o no permitidos", "type": "textarea", "required": false, "maxLength": 300 },
+
+        { "name": "SECTION_VESTIMENTA_ETIQUETA-NO-NINOS", "label": "Etiqueta no niños", "type": "textbox", "required": false, "maxLength": 100 }
 			  ]
 			},
 			{
@@ -182,11 +238,17 @@
 			  "name": "Confirmación de asistencia",
 			  "visible": true,
 			  "position": 8,
-			  "mensaje": "",
-			  "num_invitados": "",
+
+        "titulo": "Confirmación de asistencia a recepción",
+        "subtitulo": "Estaremos muy contentos si te unes a nuestro gran día. Te estamos esperando.",
+			  "num-invitados": "9",
+        "foto": "assets/images/rsvp-bg.jpg",
+
 			  "controls": [
-				{ "name": "SECTION_RSVP_MENSAJE", "label": "Mensaje opcional", "type": "textarea", "required": false },
-				{ "name": "SECTION_RSVP_NUM_INVITADOS", "label": "Número de invitados", "type": "select", "options": ["1","2","3","4","5","6","7","8","9"], "required": true }
+				{ "name": "SECTION_RSVP_TITULO", "label": "Titulo de la sección", "type": "textbox", "required": false, "maxLength": 100 },
+				{ "name": "SECTION_RSVP_SUBTITULO", "label": "Subtítulo de la sección", "type": "textarea", "required": false, "maxLength": 100 },
+				{ "name": "SECTION_RSVP_NUM-INVITADOS", "label": "Número de invitados máximo permitidos por invitación", "type": "select", "options": ["10","9","8","7","6","5","4","3","2","1"], "required": true },
+        { "name": "SECTION_RSVP_FOTO", "label": "Foto de fondo para RSVP", "type": "file", "required": false }
 			  ]
 			},
 			{
@@ -195,13 +257,106 @@
 			  "name": "Regalos",
 			  "visible": true,
 			  "position": 9,
-			  "transferencia": "",
-			  "lluvia_sobres": "",
-			  "mesa_regalos": "",
+
+        "titulo": "Regalos",
+        "subtitulo": "Tu presencia es el mejor regalo, pero si deseas hacernos un obsequio, aquí te dejamos algunas opciones.",
+
+        "transferencia-titulo": "Transferencia bancaria",
+			  "transferencia-banco": "Tarjeta BBVA",
+        "transferencia-numero": "4152 3140 3028 8016",
+        "transferencia-titular": "A nombre de: Fernanda Espinoza",
+
+        "lluvia-sobres-titulo": "Lluvia de sobres",
+			  "lluvia-sobres-descripcion": "También puedes hacerlo a través de un sobre el día del evento.",
+        
+        "mesa-regalos-titulo": "Mesa de regalos",
+			  "mesa-regalos-proveedor": "Liverpool",
+        "mesa-regalos-enlace": "https://www.liverpool.com.mx/registro-de-bodas/buscar?query=fernanda%20espinoza",
+
 			  "controls": [
-				{ "name": "SECTION_REGALOS_TRANSFERENCIA", "label": "Datos para transferencia", "type": "textbox", "required": false },
-				{ "name": "SECTION_REGALOS_LLUVIA_SOBRES", "label": "Instrucciones para lluvia de sobres", "type": "textbox", "required": false },
-				{ "name": "SECTION_REGALOS_MESA_REGALOS", "label": "Información de mesa de regalos", "type": "textbox", "required": false }
+        { "name": "SECTION_REGALOS_TITULO", "label": "Título de la sección", "type": "textbox", "required": true, "maxLength": 100 },
+        { "name": "SECTION_REGALOS_SUBTITULO", "label": "Subtítulo de la sección", "type": "textarea", "required": false, "maxLength": 300 },
+
+        { "name": "SECTION_REGALOS_TRANSFERENCIA-TITULO", "label": "Título de transferencia bancaria", "type": "textbox", "required": true, "maxLength": 100 },
+        { "name": "SECTION_REGALOS_TRANSFERENCIA-BANCO", "label": "Nombre del banco", "type": "textbox", "required": true, "maxLength": 100 },
+        { "name": "SECTION_REGALOS_TRANSFERENCIA-NUMERO", "label": "Número de cuenta o tarjeta", "type": "textbox", "required": true, "maxLength": 100 },
+        { "name": "SECTION_REGALOS_TRANSFERENCIA-TITULAR", "label": "Titular de la cuenta", "type": "textbox", "required": true, "maxLength": 100 },
+
+        { "name": "SECTION_REGALOS_LLUVIA-SOBRES-TITULO", "label": "Título de lluvia de sobres", "type": "textbox", "required": true, "maxLength": 100 },
+        { "name": "SECTION_REGALOS_LLUVIA-SOBRES-DESCRIPCION", "label": "Descripción de lluvia de sobres", "type": "textarea", "required": false, "maxLength": 300 },
+
+        { "name": "SECTION_REGALOS_MESA-REGALOS-TITULO", "label": "Título de mesa de regalos", "type": "textbox", "required": true, "maxLength": 100 },
+        { "name": "SECTION_REGALOS_MESA-REGALOS-PROVEEDOR", "label": "Proveedor de la mesa de regalos", "type": "textbox", "required": true, "maxLength": 100 },
+        { "name": "SECTION_REGALOS_MESA-REGALOS-ENLACE", "label": "Enlace a la mesa de regalos", "type": "textbox", "required": false, "maxLength": 200 }
+			  ]
+			},
+			{
+			  "type": "SECTION",
+			  "code": "HISTORIA2",
+			  "name": "Historia 2",
+			  "visible": true,
+			  "position": 10,
+
+        "titulo": "Un instante que lo cambió todo",
+        "descripcion": "Hay momentos que parecen simples, pero terminan marcando el rumbo de una vida. Así, sin prisa y sin ruido, llegó el nuestro: un encuentro que se convirtió en destino.",
+			  "foto": "assets/images/story/3.jpg",
+
+			  "controls": [
+          { "name": "SECTION_HISTORIA2_TITULO", "label": "Título de la sección", "type": "textbox", "required": true, "maxLength": 100 },
+          { "name": "SECTION_HISTORIA2_DESCRIPCION", "label": "Descripción de la sección", "type": "textarea", "required": false, "maxLength": 300 },
+          { "name": "SECTION_HISTORIA2_FOTO", "label": "Foto de la historia", "type": "file", "required": false }
+			  ]
+			},
+      {
+        "type": "SECTION",
+        "code": "PADRES-NOVIOS",
+        "name": "Padres de los novios",
+        "visible": true,
+        "position": 10,
+
+        "titulo-padres": "Nuestros padres",
+
+        "madre-novia-titulo": "Mamá de la novia",
+        "nombre-madre-novia": "Rosa Amelia Encinas Bracamonte",
+
+        "padre-novia-titulo": "Papá de la novia",
+        "nombre-padre-novia": "Cesar Armando Espinoza Gutierrez",
+
+        "madre-novio-titulo": "Mamá del novio",
+        "nombre-madre-novio": "María Amparo Gamez Ruiz",
+
+        "padre-novio-titulo": "",
+        "nombre-padre-novio": "",
+        
+        "controls": [
+          { "name": "SECTION_PADRES-NOVIOS_TITULO-PADRES", "label": "Título de la sección", "type": "textbox", "required": true, "maxLength": 100 },
+
+          { "name": "SECTION_PADRES-NOVIOS_MADRE-NOVIA-TITULO", "label": "Título mamá de la novia", "type": "textbox", "required": true, "maxLength": 100 },
+          { "name": "SECTION_PADRES-NOVIOS_NOMBRE-MADRE-NOVIA", "label": "Nombre mamá de la novia", "type": "textbox", "required": true, "maxLength": 100 },
+
+          { "name": "SECTION_PADRES-NOVIOS_PADRE-NOVIA-TITULO", "label": "Título papá de la novia", "type": "textbox", "required": true, "maxLength": 100 },
+          { "name": "SECTION_PADRES-NOVIOS_NOMBRE-PADRE-NOVIA", "label": "Nombre papá de la novia", "type": "textbox", "required": true, "maxLength": 100 },
+
+          { "name": "SECTION_PADRES-NOVIOS_MADRE-NOVIO-TITULO", "label": "Título mamá del novio", "type": "textbox", "required": true, "maxLength": 100 },
+          { "name": "SECTION_PADRES-NOVIOS_NOMBRE-MADRE-NOVIO", "label": "Nombre mamá del novio", "type": "textbox", "required": true, "maxLength": 100 },
+
+          { "name": "SECTION_PADRES-NOVIOS_PADRE-NOVIO-TITULO", "label": "Título papá del novio", "type": "textbox", "required": true, "maxLength": 100 },
+          { "name": "SECTION_PADRES-NOVIOS_NOMBRE-PADRE-NOVIO", "label": "Nombre papá del novio", "type": "textbox", "required": true, "maxLength": 100 }
+        ]
+      },
+      {
+			  "type": "SECTION",
+			  "code": "PADRINOS",
+			  "name": "Padrinos",
+			  "visible": true,
+			  "position": 10,
+        
+        "titulo": "Nuestros padrinos",
+        "descripcion": "Alejandro Gamez Ruiz\nSofia Gpe De la Riva Castro\nBrayan Gamez Ruiz\nLizbeth Carolina Flores Villegas\nMarleth Abigail Gamez Ruiz\nMiguel Cordova\nFrancisco Antonio Gamez Ruiz\nMichel Guadalupe Amaya Carrillo\nJesus Ramón Encinas Bracamonte\nGuadalupe Hernandez\nRafael Espinoza Encinas\nPaulina Gertrudis Bujanda\nLaura Elena Encinas Bracamonte",
+
+			  "controls": [
+        { "name": "SECTION_PADRINOS_TITULO", "label": "Título de la sección", "type": "textbox", "required": true, "maxLength": 100 },
+        { "name": "SECTION_PADRINOS_DESCRIPCION", "label": "Descripción de la sección", "type": "textarea", "required": false, "maxLength": 1000 }
 			  ]
 			},
 			{
@@ -210,9 +365,12 @@
 			  "name": "Galería",
 			  "visible": true,
 			  "position": 10,
+
+        "titulo": "Galería de fotos",
 			  "fotos": [],
 			  "controls": [
-				{ "name": "SECTION_GALERIA_FOTOS", "label": "Fotos para la galería", "type": "file-multiple", "required": false }
+          { "name": "SECTION_GALERIA_TITULO", "label": "Título de la sección", "type": "textbox", "required": true, "maxLength": 100 },
+				  { "name": "SECTION_GALERIA_FOTOS", "label": "Fotos para la galería", "type": "file-multiple", "required": false }
 			  ]
 			}
 		  ]
