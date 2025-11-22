@@ -3133,7 +3133,7 @@ img {
 }
 @media (max-width: 575px) {
   .wpo-site-header .navigation.sticky-header {
-    padding: 20px 10px;
+    padding: 5px 10px;
   }
 }
 .wpo-site-header-s1 {
