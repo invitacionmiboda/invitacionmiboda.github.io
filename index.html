@@ -982,6 +982,9 @@
                                 fixedBg.style.backgroundImage = `url('${img}')`;
                             };
                         }
+                    } else {
+                        // 👉👉 quita la imagen cuando ya no se ve
+                        fixedBg.style.backgroundImage = "none";
                     }
                 });
             }, {
