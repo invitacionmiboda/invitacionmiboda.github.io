@@ -472,8 +472,8 @@
                         `Asistencia: ${attending}%0A`;
                     if(attendYes.checked){
                         message += `Invitados: ${guests}`;
-                    const url = `https://wa.me/${phone}?text=${message}`;
-
+                        const url = `https://wa.me/${phone}?text=${message}`;
+                    }
                     window.open(url, "_blank");
 
                     // Reset del form después de enviar
