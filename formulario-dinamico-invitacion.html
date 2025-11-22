@@ -1,0 +1,658 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personalización de Invitación</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>	
+	body {
+	  background-color: #f8f9fa;
+	  padding: 20px;
+	}
+
+	.section-card {
+	  background: #fff;
+	  border-radius: 8px;
+	  padding: 15px;
+	  margin-bottom: 15px;
+	  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+	  cursor: grab;
+	}
+	.section-card.dragging {
+	  opacity: 0.5;
+	}
+	.controls input, .controls textarea {
+	  width: 100%;
+	  margin-bottom: 10px;
+	}
+	.drag-handle {
+	  font-size: 18px;
+	  cursor: move;
+	  color: #6c757d;
+	}
+	
+	.gallery-container {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	}
+	.gallery-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 6px;
+	background: #f8f9fa;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	cursor: grab;
+	}
+	/*.gallery-item img {
+	width: 60px;
+	height: 60px;
+	object-fit: cover;
+	border-radius: 4px;
+	}*/
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mb-4 text-center">Personaliza tu Invitación</h1>
+    <div id="form-container" class="mb-4"></div>
+    <button id="save-btn" class="btn btn-primary w-100">Guardar Cambios</button>
+  </div>
+
+  <script>
+    // Simulamos el JSON obtenido del backend	
+	let templateData = 		
+		{
+		  "templateId": "BODA-001",
+		  "templateName": "Invitación Jorge & Fernanda",
+		  "sections": [
+			{
+			  "type": "SECTION",
+			  "code": "TITLE",
+			  "name": "Título de la invitación",
+			  "visible": true,
+			  "position": 1,
+			  "title": "Nos casamos",
+			  "description": "Jorge & Fernanda",
+			  "controls": [
+				{ "name": "SECTION_TITLE_TITLE", "label": "Título principal", "type": "textbox", "required": true, "maxLength": 50 },
+				{ "name": "SECTION_TITLE_DESCRIPTION", "label": "Subtítulo", "type": "textbox", "required": true, "maxLength": 50 }
+			  ]
+			},
+			{
+			  "type": "SECTION",
+			  "code": "COUNTDOWN",
+			  "name": "Cuenta regresiva",
+			  "visible": true,
+			  "position": 2,
+			  "date": "2025-12-06 16:00:00",
+			  "controls": [
+				{ "name": "SECTION_COUNTDOWN_DATE", "label": "Fecha del evento", "type": "date", "required": true }
+			  ]
+			},
+			{
+			  "type": "SECTION",
+			  "code": "INFO-NOVIA",
+			  "name": "Información de la novia",
+			  "visible": true,
+			  "position": 3,
+			  "title": "Fernanda",
+			  "description": "Descripción de la novia",
+			  "foto": "",
+			  "controls": [
+				{ "name": "SECTION_INFO-NOVIA_TITLE", "label": "Nombre de la novia", "type": "textbox", "required": true, "maxLength": 80 },
+				{ "name": "SECTION_INFO-NOVIA_DESCRIPTION", "label": "Descripción de la novia", "type": "textarea", "required": false, "maxLength": 500 },
+				{ "name": "SECTION_INFO-NOVIA_FOTO", "label": "Foto de la novia", "type": "file", "required": false }
+			  ]
+			},
+			{
+			  "type": "SECTION",
+			  "code": "INFO-NOVIO",
+			  "name": "Información del novio",
+			  "visible": true,
+			  "position": 4,
+			  "title": "Jorge",
+			  "description": "Descripción del novio",
+			  "foto": "",
+			  "controls": [
+				{ "name": "SECTION_INFO-NOVIO_TITLE", "label": "Nombre del novio", "type": "textbox", "required": true, "maxLength": 80 },
+				{ "name": "SECTION_INFO-NOVIO_DESCRIPTION", "label": "Descripción del novio", "type": "textarea", "required": false, "maxLength": 500 },
+				{ "name": "SECTION_INFO-NOVIO_FOTO", "label": "Foto del novio", "type": "file", "required": false }
+			  ]
+			},
+			{
+			  "type": "SECTION",
+			  "code": "HISTORIA",
+			  "name": "Nuestra historia",
+			  "visible": true,
+			  "position": 5,
+			  "subtitulo": "Cómo nos conocimos",
+			  "texto": "Aquí irá la historia...",
+			  "fotos": [],
+			  "controls": [
+				{ "name": "SECTION_HISTORIA_SUBTITULO", "label": "Subtítulo de la historia", "type": "textbox", "required": true, "maxLength": 100 },
+				{ "name": "SECTION_HISTORIA_TEXTO", "label": "Texto de la historia", "type": "textarea", "required": false, "maxLength": 1000 },
+				{ "name": "SECTION_HISTORIA_FOTOS", "label": "Fotos de la historia", "type": "file-multiple", "required": false }
+			  ]
+			},
+			{
+			  "type": "SECTION",
+			  "code": "EVENTOS",
+			  "name": "Dónde y cuándo",
+			  "visible": true,
+			  "position": 6,
+			  "ceremonia_lugar": "Nuestra Señora de Fátima",
+			  "ceremonia_hora": "16:00",
+			  "ceremonia_mapa": "",
+			  "recepcion_lugar": "Campestre Monsal",
+			  "recepcion_hora": "21:00",
+			  "recepcion_mapa": "",
+			  "controls": [
+				{ "name": "SECTION_EVENTOS_CEREMONIA_LUGAR", "label": "Nombre del lugar de la ceremonia", "type": "textbox", "required": true },
+				{ "name": "SECTION_EVENTOS_CEREMONIA_HORA", "label": "Hora de la ceremonia", "type": "textbox", "required": true },
+				{ "name": "SECTION_EVENTOS_CEREMONIA_MAPA", "label": "Mapa de la ceremonia", "type": "textbox", "required": false },
+				{ "name": "SECTION_EVENTOS_RECEPCION_LUGAR", "label": "Nombre del lugar de la recepción", "type": "textbox", "required": true },
+				{ "name": "SECTION_EVENTOS_RECEPCION_HORA", "label": "Hora de la recepción", "type": "textbox", "required": true },
+				{ "name": "SECTION_EVENTOS_RECEPCION_MAPA", "label": "Mapa de la recepción", "type": "textbox", "required": false }
+			  ]
+			},
+			{
+			  "type": "SECTION",
+			  "code": "VESTIMENTA",
+			  "name": "Código de vestimenta",
+			  "visible": true,
+			  "position": 7,
+			  "hombres": "Formal o vaquero.",
+			  "mujeres": "Vestido.",
+			  "colores": "Color blanco reservado para la novia",
+			  "controls": [
+				{ "name": "SECTION_VESTIMENTA_HOMBRES", "label": "Vestimenta para hombres", "type": "textbox", "required": true },
+				{ "name": "SECTION_VESTIMENTA_MUJERES", "label": "Vestimenta para mujeres", "type": "textbox", "required": true },
+				{ "name": "SECTION_VESTIMENTA_COLORES", "label": "Colores permitidos", "type": "textarea", "required": false }
+			  ]
+			},
+			{
+			  "type": "SECTION",
+			  "code": "RSVP",
+			  "name": "Confirmación de asistencia",
+			  "visible": true,
+			  "position": 8,
+			  "mensaje": "",
+			  "num_invitados": "",
+			  "controls": [
+				{ "name": "SECTION_RSVP_MENSAJE", "label": "Mensaje opcional", "type": "textarea", "required": false },
+				{ "name": "SECTION_RSVP_NUM_INVITADOS", "label": "Número de invitados", "type": "select", "options": ["1","2","3","4","5","6","7","8","9"], "required": true }
+			  ]
+			},
+			{
+			  "type": "SECTION",
+			  "code": "REGALOS",
+			  "name": "Regalos",
+			  "visible": true,
+			  "position": 9,
+			  "transferencia": "",
+			  "lluvia_sobres": "",
+			  "mesa_regalos": "",
+			  "controls": [
+				{ "name": "SECTION_REGALOS_TRANSFERENCIA", "label": "Datos para transferencia", "type": "textbox", "required": false },
+				{ "name": "SECTION_REGALOS_LLUVIA_SOBRES", "label": "Instrucciones para lluvia de sobres", "type": "textbox", "required": false },
+				{ "name": "SECTION_REGALOS_MESA_REGALOS", "label": "Información de mesa de regalos", "type": "textbox", "required": false }
+			  ]
+			},
+			{
+			  "type": "SECTION",
+			  "code": "GALERIA",
+			  "name": "Galería",
+			  "visible": true,
+			  "position": 10,
+			  "fotos": [],
+			  "controls": [
+				{ "name": "SECTION_GALERIA_FOTOS", "label": "Fotos para la galería", "type": "file-multiple", "required": false }
+			  ]
+			}
+		  ]
+		}
+
+
+
+
+    const container = document.getElementById('form-container');
+	
+	// Estado global para galería
+	let galleryFiles = [];
+
+	
+
+
+
+
+
+function renderForm() {
+  container.innerHTML = '';
+  templateData.sections.sort((a, b) => a.position - b.position);
+
+  templateData.sections.forEach((section, index) => {
+    const div = document.createElement('div');
+    div.className = 'section-card';
+    div.draggable = true;
+    div.dataset.index = index;
+
+    div.innerHTML = `
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5>${section.name}</h5>
+        <span class="drag-handle">☰</span>
+      </div>
+      <label class="form-check-label mb-2">
+        <input type="checkbox" class="form-check-input visible-toggle" ${section.visible ? 'checked' : ''}> Visible
+      </label>
+      <div class="controls">
+        ${section.controls.map(ctrl => {
+          const propKey = ctrl.name.split('_').pop().toLowerCase();
+          const value = section[propKey] || '';
+          const labelText = ctrl.label; // ✅ Usamos el label del JSON
+
+          if (ctrl.type === 'textbox') {
+            return `
+              <div class="mb-3">
+                <label class="form-label">${labelText}</label>
+                <input type="text" class="form-control" name="${ctrl.name}" value="${value}" maxlength="${ctrl.maxLength || ''}" placeholder="${labelText}">
+              </div>`;
+          } else if (ctrl.type === 'textarea') {
+            return `
+              <div class="mb-3">
+                <label class="form-label">${labelText}</label>
+                <textarea class="form-control" name="${ctrl.name}" maxlength="${ctrl.maxLength || ''}" placeholder="${labelText}">${value}</textarea>
+              </div>`;
+          } else if (ctrl.type === 'file') {
+            return `
+              <div class="mb-3">
+                <label class="form-label">${labelText}</label>
+                <input type="file" class="form-control file-input" name="${ctrl.name}">
+                <div class="preview-container mt-2"></div>
+              </div>`;
+          } else if (ctrl.type === 'file-multiple') {
+            return `
+              <div class="mb-3">
+                <label class="form-label">${labelText}</label>
+                <input type="file" class="form-control file-multiple-input" name="${ctrl.name}" multiple>
+                <div class="gallery-container mt-2"></div>
+              </div>`;
+          } else if (ctrl.type === 'select') {
+            return `
+              <div class="mb-3">
+                <label class="form-label">${labelText}</label>
+                <select class="form-select" name="${ctrl.name}">
+                  ${ctrl.options.map(o => `<option value="${o}" ${value === o ? 'selected' : ''}>${o}</option>`).join('')}
+                </select>
+              </div>`;
+          } else if (ctrl.type === 'date') {
+            return `
+              <div class="mb-3">
+                <label class="form-label">${labelText}</label>
+                <input type="date" class="form-control" name="${ctrl.name}" value="${section[propKey] || ''}">
+              </div>`;
+          }
+        }).join('')}
+      </div>
+    `;
+    container.appendChild(div);
+  });
+
+  enableDragAndDrop();
+}
+
+
+
+container.addEventListener('change', e => {
+  // Foto individual
+  if (e.target.classList.contains('file-input')) {
+    const previewContainer = e.target.nextElementSibling;
+    previewContainer.innerHTML = '';
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      img.style.width = '80px';
+      img.style.height = '80px';
+      img.style.objectFit = 'cover';
+      img.style.borderRadius = '6px';
+      previewContainer.appendChild(img);
+    }
+  }
+  // Galería múltiple
+  if (e.target.classList.contains('file-multiple-input')) {
+    const galleryContainer = e.target.parentElement.querySelector('.gallery-container');
+    const newFiles = Array.from(e.target.files);
+
+    // Combinar con existentes y eliminar duplicados
+    const combined = [...galleryFiles, ...newFiles];
+    const unique = combined.filter((file, index, self) =>
+      index === self.findIndex(f => f.name === file.name)
+    );
+
+    // Limitar a 10
+    galleryFiles = unique.slice(0, 10);
+
+    // Renderizar galería
+    renderGallery(galleryContainer);
+  }
+});
+
+
+
+/*function renderGallery(container) {
+  container.innerHTML = '';
+  galleryFiles.forEach(file => {
+    if (file.type.startsWith('image/')) {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.draggable = true;
+      item.dataset.filename = file.name; // ✅ Identificador único
+
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      img.style.width = '60px';
+      img.style.height = '60px';
+      img.style.objectFit = 'cover';
+      img.style.borderRadius = '4px';
+
+      const name = document.createElement('span');
+      name.textContent = file.name;
+      name.style.flex = '1';
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = '✕';
+      deleteBtn.className = 'btn btn-sm btn-danger';
+      deleteBtn.addEventListener('click', () => {
+        galleryFiles = galleryFiles.filter(f => f.name !== file.name); // ✅ Eliminar por nombre
+        renderGallery(container);
+      });
+
+      item.appendChild(img);
+      item.appendChild(name);
+      item.appendChild(deleteBtn);
+      container.appendChild(item);
+    }
+  });
+
+  enableGalleryDragAndDrop(container);
+}
+
+
+function enableGalleryDragAndDrop(container) {
+  let draggedItem = null;
+
+  container.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('dragstart', () => {
+      draggedItem = item;
+      item.classList.add('dragging');
+    });
+
+    item.addEventListener('dragend', () => {
+      item.classList.remove('dragging');
+      draggedItem = null;
+      updateGalleryOrder(container);
+    });
+  });
+
+  container.addEventListener('dragover', e => {
+    e.preventDefault();
+    const afterElement = getDragAfterElement(container, e.clientY);
+    if (!afterElement) {
+      container.appendChild(draggedItem);
+    } else {
+      container.insertBefore(draggedItem, afterElement);
+    }
+  });
+}
+
+function getDragAfterElement(container, y) {
+  const draggableElements = [...container.querySelectorAll('.gallery-item:not(.dragging)')];
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    if (offset < 0 && offset > closest.offset) {
+      return { offset: offset, element: child };
+    } else {
+      return closest;
+    }
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+
+
+function getDragAfterElement(container, y) {
+  const draggableElements = [...container.querySelectorAll('.gallery-item:not(.dragging)')];
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    if (offset < 0 && offset > closest.offset) {
+      return { offset: offset, element: child };
+    } else {
+      return closest;
+    }
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+
+
+function updateGalleryOrder(container) {
+  const newOrder = [];
+  container.querySelectorAll('.gallery-item').forEach(item => {
+    const filename = item.dataset.filename;
+    const file = galleryFiles.find(f => f.name === filename);
+    if (file) newOrder.push(file);
+  });
+  galleryFiles = newOrder; // ✅ Actualiza el array con el nuevo orden
+}*/
+
+
+function renderGallery(container) {
+  container.innerHTML = '';
+  galleryFiles.forEach(file => {
+    if (file.type.startsWith('image/')) {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.draggable = true;
+      item.dataset.filename = file.name;
+
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      img.style.width = '60px';
+      img.style.height = '60px';
+      img.style.objectFit = 'cover';
+      img.style.borderRadius = '4px';
+
+      const name = document.createElement('span');
+      name.textContent = file.name;
+      name.style.flex = '1';
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = '✕';
+      deleteBtn.className = 'btn btn-sm btn-danger';
+      deleteBtn.addEventListener('click', () => {
+        galleryFiles = galleryFiles.filter(f => f.name !== file.name);
+        renderGallery(container);
+      });
+
+      item.appendChild(img);
+      item.appendChild(name);
+      item.appendChild(deleteBtn);
+      container.appendChild(item);
+    }
+  });
+
+  enableGalleryDragAndDrop(container);
+}
+
+function enableGalleryDragAndDrop(container) {
+    let draggedItem = null;
+
+    container.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('dragstart', (e) => {
+            draggedItem = item;
+            item.classList.add('dragging');
+            e.dataTransfer.effectAllowed = "move";
+            e.dataTransfer.setData("text/plain", item.dataset.filename);
+        });
+
+        item.addEventListener('dragend', () => {
+            item.classList.remove('dragging');
+            draggedItem = null;
+            updateGalleryOrder(container);
+        });
+    });
+
+    container.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        const dragging = container.querySelector('.dragging');
+        if (!dragging) return;
+
+        const siblings = [...container.querySelectorAll('.gallery-item:not(.dragging)')];
+        let insertBefore = null;
+
+        for (const sib of siblings) {
+            const box = sib.getBoundingClientRect();
+            const middle = box.top + box.height / 2;
+
+            if (e.clientY < middle) {
+                insertBefore = sib;
+                break;
+            }
+        }
+
+        container.insertBefore(dragging, insertBefore);
+    });
+}
+
+
+function getDragAfterElement(container, y) {
+  const draggableElements = [...container.querySelectorAll('.gallery-item:not(.dragging)')];
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    if (offset < 0 && offset > closest.offset) {
+      return { offset: offset, element: child };
+    } else {
+      return closest;
+    }
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
+function updateGalleryOrder(container) {
+  const newOrder = [];
+  container.querySelectorAll('.gallery-item').forEach(item => {
+    const filename = item.dataset.filename;
+    const file = galleryFiles.find(f => f.name === filename);
+    if (file) newOrder.push(file);
+  });
+  galleryFiles = newOrder;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
+    function renderForm(template) {
+      container.innerHTML = '';
+      template.sections.sort((a, b) => a.position - b.position);
+      template.sections.forEach((section, index) => {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'section-card';
+        sectionDiv.draggable = true;
+        sectionDiv.dataset.index = index;
+
+        sectionDiv.innerHTML = `
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5>${section.name}</h5>
+            <span class="drag-handle">☰</span>
+          </div>
+          <label class="form-check-label mb-2">
+            <input type="checkbox" class="form-check-input visible-toggle" ${section.visible ? 'checked' : ''}> Visible
+          </label>
+          <div class="controls">
+            ${section.controls.map(ctrl => {
+              if (ctrl.type === 'textbox') {
+                return `<input type="text" class="form-control" name="${ctrl.name}" maxlength="${ctrl.maxLength}" placeholder="${ctrl.name}" value="${section.title || ''}">`;
+              } else if (ctrl.type === 'textarea') {
+                return `<textarea class="form-control" name="${ctrl.name}" maxlength="${ctrl.maxLength}" placeholder="${ctrl.name}">${section.description || ''}</textarea>`;
+              }
+            }).join('')}
+          </div>
+        `;
+        container.appendChild(sectionDiv);
+      });
+      enableDragAndDrop();
+    }
+	*/
+
+    function enableDragAndDrop() {
+      const cards = document.querySelectorAll('.section-card');
+      let dragged = null;
+
+      cards.forEach(card => {
+        card.addEventListener('dragstart', () => {
+          dragged = card;
+          card.classList.add('dragging');
+        });
+        card.addEventListener('dragend', () => {
+          dragged.classList.remove('dragging');
+          dragged = null;
+        });
+        card.addEventListener('dragover', e => {
+          e.preventDefault();
+          const afterElement = getDragAfterElement(container, e.clientY);
+          if (afterElement == null) {
+            container.appendChild(dragged);
+          } else {
+            container.insertBefore(dragged, afterElement);
+          }
+        });
+      });
+    }
+
+    function getDragAfterElement(container, y) {
+      const draggableElements = [...container.querySelectorAll('.section-card:not(.dragging)')];
+      return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    document.getElementById('save-btn').addEventListener('click', () => {
+      const updatedSections = [];
+      document.querySelectorAll('.section-card').forEach((card, newIndex) => {
+        const section = templateData.sections[card.dataset.index];
+        section.visible = card.querySelector('.visible-toggle').checked;
+        section.position = newIndex + 1;
+        const inputs = card.querySelectorAll('input[type="text"], textarea');
+        inputs.forEach(input => {
+          if (input.name.includes('TITLE')) section.title = input.value;
+          if (input.name.includes('DESCRIPTION')) section.description = input.value;
+        });
+        updatedSections.push(section);
+      });
+      console.log('JSON actualizado:', templateData);
+      alert('Cambios guardados (ver consola)');
+    });
+
+    renderForm(templateData);
+  </script>
+</body>
