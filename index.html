@@ -465,15 +465,15 @@
                     // --- ENVIAR SIEMPRE A WHATSAPP ---
                     const phone = "5216621260275"; // <<--- CAMBIA A TU NÚMERO
 
-                    const message =
+                    let message =
                         `BODA%0A` +
                         `Confirmación de asistencia:%0A` +
                         `Nombre: ${name}%0A` +
                         `Asistencia: ${attending}%0A`;
                     if(attendYes.checked){
                         message += `Invitados: ${guests}`;
-                        const url = `https://wa.me/${phone}?text=${message}`;
                     }
+                    const url = `https://wa.me/${phone}?text=${message}`;
                     window.open(url, "_blank");
 
                     // Reset del form después de enviar
