@@ -8,10 +8,10 @@
 
     // true  = la cancion inicia sonando
     // false = la cancion inicia muteada
-    var MUSICA_INICIA_SONANDO = true;
+    var MUSICA_INICIA_SONANDO = false;
 
     // Volumen de la cancion, de 0 a 100
-    var MUSICA_VOLUMEN = 60;
+    var MUSICA_VOLUMEN = 50;
 
     // Ruta del archivo de audio
     var MUSICA_ARCHIVO = "assets/song/main.mp3";
