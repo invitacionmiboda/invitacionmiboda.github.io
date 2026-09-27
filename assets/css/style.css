@@ -337,6 +337,51 @@ img {
   transform: translate(-50%, -50%);
 }
 
+/*** music toggle **/
+.music-toggle {
+  background-color: rgba(200, 168, 152, 0.7);
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  border: 2px solid #C8A898;
+  border-radius: 45px;
+  text-align: center;
+  display: block;
+  position: fixed;
+  z-index: 999;
+  left: 15px;
+  bottom: 15px;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+}
+@media (max-width: 991px) {
+  .music-toggle {
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+  }
+}
+.music-toggle:hover {
+  background-color: #C8A898;
+}
+
+.music-toggle i {
+  font-size: 18px;
+  font-size: 1.2rem;
+  color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
 /** for popup image ***/
 .mfp-wrap {
   background-color: rgba(0, 0, 0, 0.9);

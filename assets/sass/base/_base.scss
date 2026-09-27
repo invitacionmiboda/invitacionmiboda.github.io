@@ -257,6 +257,44 @@ img{
 }
 
 
+/*** music toggle **/
+.music-toggle {
+    background-color: transparentize($theme-primary-color, 0.3);
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    border: 2px solid $theme-primary-color;
+    border-radius: 45px;
+    text-align: center;
+    display: block;
+    position: fixed;
+    z-index: 999;
+    left: 15px;
+    bottom: 15px;
+    @include transition-time(0.2s);
+
+    @include media-query(991px) {
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+    }
+
+    &:hover {
+        background-color: $theme-primary-color;
+    }
+}
+
+.music-toggle i {
+    font-size: 18px;
+    font-size: calc-rem-value(18);
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    @include center-by-translating();
+}
+
+
 /** for popup image ***/
 .mfp-wrap {
     background-color: transparentize($black, 0.1);

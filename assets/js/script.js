@@ -2,6 +2,21 @@
 
     "use strict";
 
+    /*==========================================================================
+        = CONFIGURACION DE LA MUSICA DE FONDO
+    ==========================================================================*/
+
+    // true  = la cancion inicia sonando
+    // false = la cancion inicia muteada
+    var MUSICA_INICIA_SONANDO = true;
+
+    // Volumen de la cancion, de 0 a 100
+    var MUSICA_VOLUMEN = 60;
+
+    // Ruta del archivo de audio
+    var MUSICA_ARCHIVO = "assets/song/main.mp3";
+
+
     /*------------------------------------------
         Nice Select
     -------------------------------------------*/
@@ -903,6 +918,89 @@
         }, 700);
         return false;
     })
+
+
+
+    /*------------------------------------------
+        = MUSICA DE FONDO (BOTON FLOTANTE)
+    -------------------------------------------*/
+    var backgroundMusic = null;
+    var $musicToggleBtn = null;
+
+    function buildBackgroundMusic() {
+        backgroundMusic = new Audio(MUSICA_ARCHIVO);
+        backgroundMusic.loop = true;
+        backgroundMusic.preload = "auto";
+        backgroundMusic.volume = Math.min(Math.max(MUSICA_VOLUMEN, 0), 100) / 100;
+
+        $("body").append("<a href='#' class='music-toggle' aria-label='Musica de fondo'><i class='fa fa-volume-up'></i></a>");
+        $musicToggleBtn = $("a.music-toggle");
+
+        $musicToggleBtn.on("click", function(e) {
+            e.preventDefault();
+            toggleBackgroundMusic();
+        });
+
+        if (MUSICA_INICIA_SONANDO) {
+            playBackgroundMusic();
+        } else {
+            updateMusicToggleIcon(false);
+        }
+    }
+
+    function updateMusicToggleIcon(isPlaying) {
+        if (!$musicToggleBtn) {
+            return;
+        }
+
+        var $icon = $musicToggleBtn.find("i");
+
+        if (isPlaying) {
+            $icon.removeClass("fa-volume-off").addClass("fa-volume-up");
+            $musicToggleBtn.attr("title", "Silenciar musica");
+        } else {
+            $icon.removeClass("fa-volume-up").addClass("fa-volume-off");
+            $musicToggleBtn.attr("title", "Activar musica");
+        }
+    }
+
+    function playBackgroundMusic() {
+        var playAttempt = backgroundMusic.play();
+
+        if (playAttempt && typeof playAttempt.then === "function") {
+            playAttempt.then(function() {
+                updateMusicToggleIcon(true);
+            }).catch(function() {
+                // El navegador bloqueo la reproduccion automatica:
+                // se queda en espera de la primera interaccion del usuario.
+                updateMusicToggleIcon(false);
+                waitForUserGestureToPlay();
+            });
+        } else {
+            updateMusicToggleIcon(true);
+        }
+    }
+
+    function waitForUserGestureToPlay() {
+        $(document).off(".backgroundMusic");
+        $(document).one("click.backgroundMusic touchstart.backgroundMusic keydown.backgroundMusic scroll.backgroundMusic", function() {
+            $(document).off(".backgroundMusic");
+            playBackgroundMusic();
+        });
+    }
+
+    function toggleBackgroundMusic() {
+        $(document).off(".backgroundMusic");
+
+        if (backgroundMusic.paused) {
+            playBackgroundMusic();
+        } else {
+            backgroundMusic.pause();
+            updateMusicToggleIcon(false);
+        }
+    }
+
+    buildBackgroundMusic();
 
 
 
