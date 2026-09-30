@@ -775,6 +775,29 @@
         if (btn && btn.parentNode) { btn.parentNode.removeChild(btn); }
     }
 
+    // script.js inicializa Isotope apenas se inyecta, cuando las imagenes de
+    // la galeria todavia no tienen alto -> quedan huecos enormes.
+    // Se recalcula el layout conforme van cargando.
+    function relayoutGallery() {
+        if (!window.jQuery || !jQuery.fn.isotope) { return; }
+
+        var $container = jQuery(".gallery-container");
+        if (!$container.length) { return; }
+
+        function layout() {
+            if ($container.data("isotope")) { $container.isotope("layout"); }
+        }
+
+        if (jQuery.fn.imagesLoaded) {
+            $container.imagesLoaded().progress(layout).always(layout);
+        } else {
+            jQuery(window).on("load", layout);
+        }
+
+        jQuery(window).on("resize.invitacionGallery", layout);
+        layout();
+    }
+
     /* ---------------------------------------------------------------------
        CARGA DEL SCRIPT ORIGINAL (fancybox, isotope, wow, preloader, ...)
        --------------------------------------------------------------------- */
@@ -788,6 +811,7 @@
                 jQuery(window).trigger("load");
             }
             applyMusicPreference(data);
+            relayoutGallery();
         };
         script.onerror = function () { hidePreloader(); };
         document.body.appendChild(script);
