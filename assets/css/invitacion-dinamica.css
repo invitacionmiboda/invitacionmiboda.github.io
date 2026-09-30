@@ -1,0 +1,345 @@
+/* =============================================================================
+   INVITACION DINAMICA - estilos exclusivos de index_dinamico.html
+   -----------------------------------------------------------------------------
+   Solo agrega lo que la plantilla original no tenia (itinerario, listas de
+   nombres, redes sociales, seccion generica y estados de carga/error).
+   No sobreescribe nada de assets/css/style.css.
+   ========================================================================== */
+
+/* ---------- utilidades faltantes ---------- */
+.font-size-xl {
+  font-size: x-large !important;
+  vertical-align: middle;
+  color: #c8a898;
+}
+
+/* ---------- cuenta regresiva ----------
+   style.css estiliza el contador por id (#clock) y ese id lo usa el
+   countdown con fecha fija de assets/js/script.js. La plantilla dinamica
+   usa #clock-dinamico, asi que se replican aqui las mismas reglas.        */
+.static-hero .wpo-wedding-date #clock-dinamico {
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+@media (max-width: 530px) {
+  .static-hero .wpo-wedding-date #clock-dinamico {
+    margin-top: 0;
+  }
+}
+
+.static-hero .wpo-wedding-date #clock-dinamico > div {
+  float: left;
+  display: table;
+}
+
+.static-hero .wpo-wedding-date #clock-dinamico > div > div {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.static-hero .wpo-wedding-date #clock-dinamico > div + div {
+  margin-left: 80px;
+}
+
+@media (max-width: 1200px) {
+  .static-hero .wpo-wedding-date #clock-dinamico > div + div {
+    margin-left: 50px;
+  }
+}
+
+@media (max-width: 991px) {
+  .static-hero .wpo-wedding-date #clock-dinamico > div + div {
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  .static-hero .wpo-wedding-date #clock-dinamico > div + div {
+    margin-left: 10px;
+  }
+}
+
+.static-hero .wpo-wedding-date #clock-dinamico .time {
+  font-family: "Sail", cursive;
+  font-size: 65px;
+  font-size: 4.3333333333rem;
+  line-height: 1em;
+  padding-top: 15px;
+  color: #585858;
+}
+
+@media (max-width: 1300px) {
+  .static-hero .wpo-wedding-date #clock-dinamico .time {
+    font-size: 50px;
+    font-size: 3.3333333333rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .static-hero .wpo-wedding-date #clock-dinamico .time {
+    font-size: 40px;
+    font-size: 2.6666666667rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .static-hero .wpo-wedding-date #clock-dinamico .time {
+    font-size: 50px;
+    font-size: 3.3333333333rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .static-hero .wpo-wedding-date #clock-dinamico .time {
+    font-size: 40px;
+    font-size: 2.6666666667rem;
+  }
+}
+
+.static-hero .wpo-wedding-date #clock-dinamico span {
+  color: #585858;
+  font-size: 25px;
+}
+
+@media (max-width: 991px) {
+  .static-hero .wpo-wedding-date #clock-dinamico span {
+    font-size: 20px;
+  }
+}
+
+/* ---------- estado de error ---------- */
+.invitacion-error {
+  position: relative;
+  z-index: 5;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.invitacion-error[hidden] {
+  display: none;
+}
+
+.invitacion-error h2 {
+  font-family: "Sail", cursive;
+  font-size: 38px;
+  color: #101010;
+  margin-bottom: 14px;
+}
+
+.invitacion-error p {
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  color: #6b6b6b;
+  margin: 0;
+}
+
+/* ---------- RSVP: campo de nombre bloqueado (invitacion personalizada) ---------- */
+.wpo-contact-form-area input.wpo-readonly,
+.wpo-contact-form-area input[readonly] {
+  background-color: rgba(200, 168, 152, 0.12);
+  cursor: default;
+  font-weight: 600;
+}
+
+/* ---------- bloques de detalles / codigo de vestimenta ---------- */
+.wpo-details-block {
+  margin-bottom: 22px;
+}
+
+.wpo-details-block:last-child {
+  margin-bottom: 0;
+}
+
+.wpo-details-block strong {
+  display: block;
+  font-family: "Jost", sans-serif;
+  font-size: 18px;
+  color: #101010;
+  letter-spacing: 0.4px;
+}
+
+.wpo-details-block span {
+  display: block;
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  color: #6b6b6b;
+  margin-top: 4px;
+  line-height: 28px;
+}
+
+/* ---------- itinerario ---------- */
+.wpo-itinerary-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.wpo-itinerary-list::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 27px;
+  width: 1px;
+  background: #e7e7e7;
+}
+
+.wpo-itinerary-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 0 0 34px 0;
+}
+
+.wpo-itinerary-item:last-child {
+  padding-bottom: 0;
+}
+
+.wpo-itinerary-icon {
+  flex: 0 0 auto;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #fff;
+  border: 1px solid #e7cfc3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #c8a898;
+  font-size: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.wpo-itinerary-body {
+  display: block;
+  padding-top: 4px;
+  text-align: left;
+}
+
+.wpo-itinerary-hour {
+  display: block;
+  font-family: "Jost", sans-serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #c8a898;
+}
+
+.wpo-itinerary-title {
+  display: block;
+  font-family: "Sail", cursive;
+  font-size: 26px;
+  line-height: 34px;
+  color: #101010;
+  margin-top: 2px;
+}
+
+.wpo-itinerary-desc {
+  display: block;
+  font-family: "Jost", sans-serif;
+  font-size: 15px;
+  color: #6b6b6b;
+  margin-top: 4px;
+}
+
+@media (max-width: 575px) {
+  .wpo-itinerary-item {
+    gap: 14px;
+    padding-bottom: 26px;
+  }
+
+  .wpo-itinerary-list::before {
+    left: 22px;
+  }
+
+  .wpo-itinerary-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 17px;
+  }
+
+  .wpo-itinerary-title {
+    font-size: 22px;
+    line-height: 30px;
+  }
+}
+
+/* ---------- listas de nombres (padrinos / chambelanes) ---------- */
+.wpo-names-list {
+  font-family: "Jost", sans-serif;
+}
+
+.wpo-name-line {
+  font-size: 18px;
+  line-height: 32px;
+  color: #101010;
+  margin: 0 0 6px 0;
+}
+
+.wpo-name-spacer {
+  margin-bottom: 18px;
+}
+
+/* ---------- redes sociales ---------- */
+.wpo-social-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
+
+.wpo-social-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border: 1px solid #e7cfc3;
+  border-radius: 40px;
+  font-family: "Jost", sans-serif;
+  font-size: 16px;
+  color: #101010;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.wpo-social-item i {
+  color: #c8a898;
+  font-size: 18px;
+}
+
+.wpo-social-item:hover {
+  background: #c8a898;
+  border-color: #c8a898;
+  color: #fff;
+}
+
+.wpo-social-item:hover i {
+  color: #fff;
+}
+
+/* ---------- seccion generica (HTML libre del admin) ---------- */
+.wpo-generic-section {
+  font-family: "Jost", sans-serif;
+  color: #6b6b6b;
+}
+
+.wpo-generic-section img {
+  max-width: 100%;
+  height: auto;
+}
+
+.wpo-generic-section h1,
+.wpo-generic-section h2,
+.wpo-generic-section h3 {
+  font-family: "Sail", cursive;
+  color: #101010;
+}

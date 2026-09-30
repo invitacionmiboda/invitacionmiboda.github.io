@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--
+        ============================================================
+        PLANTILLA DINAMICA  (template_code: BOD_A_01)
+        ------------------------------------------------------------
+        Todo el contenido se inyecta desde un JSON.
+        Ver: assets/js/invitacion-dinamica.js
+             assets/data/invitacion-demo.json
+             assets/data/invitacion-demo-personalizada.json
+
+        Como probar:
+          index_dinamico.html                      -> RSVP abierto (type 1)
+          index_dinamico.html?guid=<el-guid>       -> RSVP personalizado (type 2)
+          index_dinamico.html?data=assets/data/otro.json -> carga otro JSON
+        ============================================================
+    -->
+
+    <!--
+        NOTA SOBRE OG / SEO:
+        Al ser una plantilla estatica servida para muchas invitaciones, las
+        etiquetas og: NO pueden personalizarse por cliente desde el navegador
+        (los crawlers de WhatsApp/Facebook no ejecutan JavaScript).
+        Por eso aqui van valores genericos. Cuando exista el backend, el
+        servidor debera renderizar estas etiquetas (SSR / edge function) con
+        los datos reales de la invitacion.
+    -->
+    <meta name="description" content="Estas invitado. Acompananos en este dia tan especial.">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Estas invitado">
+    <meta property="og:description" content="Acompananos en este dia tan importante.">
+    <meta property="og:image" content="https://invitacionmiboda.github.io/assets/images/og-default.jpg">
+    <meta property="og:image:width" content="500">
+    <meta property="og:image:height" content="350">
+    <meta property="og:image:alt" content="Estas invitado">
+    <meta property="og:image:type" content="image/jpeg">
+
+    <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png">
+    <title>Invitación</title>
+
+    <link href="assets/css/themify-icons.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="assets/css/flaticon.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/magnific-popup.css" rel="stylesheet">
+    <link href="assets/css/animate.css" rel="stylesheet">
+    <link href="assets/css/owl.carousel.css" rel="stylesheet">
+    <link href="assets/css/owl.theme.css" rel="stylesheet">
+    <link href="assets/css/slick.css" rel="stylesheet">
+    <link href="assets/css/slick-theme.css" rel="stylesheet">
+    <link href="assets/css/swiper.min.css" rel="stylesheet">
+    <link href="assets/css/nice-select.css" rel="stylesheet">
+    <link href="assets/css/owl.transitions.css" rel="stylesheet">
+    <link href="assets/css/jquery.fancybox.css" rel="stylesheet">
+    <link href="assets/css/odometer-theme-default.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- estilos exclusivos de la plantilla dinamica -->
+    <link href="assets/css/invitacion-dinamica.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="parallax-fixed-bg"></div>
+
+    <!-- start page-wrapper -->
+    <div class="page-wrapper">
+        <!-- start preloader -->
+        <div class="preloader">
+            <div class="vertical-centered-box">
+                <div class="content">
+                    <div class="loader-circle"></div>
+                    <div class="loader-line-mask">
+                        <div class="loader-line"></div>
+                    </div>
+                    <img src="assets/images/preloader.png" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- end preloader -->
+
+        <!-- ==== SLOTS: aqui se inyecta todo lo que viene del JSON ==== -->
+        <header id="header" data-slot="header"></header>
+        <div id="invitacion-root" data-slot="sections"></div>
+
+        <!-- mensaje de error si el JSON no se puede cargar -->
+        <div id="invitacion-error" class="invitacion-error" hidden>
+            <div class="invitacion-error-inner">
+                <h2>No pudimos cargar la invitación</h2>
+                <p id="invitacion-error-detail"></p>
+            </div>
+        </div>
+    </div>
+    <!-- end of page-wrapper -->
+
+
+    <!-- ============================================================
+         PLANTILLAS (no se renderizan, las usa invitacion-dinamica.js)
+         {{ var }}   -> valor escapado (seguro)
+         {{{ var }}} -> HTML ya generado por el renderer
+         ============================================================ -->
+
+    <!-- ===== HEADER ===== -->
+    <template id="tpl-header">
+        <div class="wpo-site-header wpo-site-header-s1">
+            <nav class="navigation navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="navbar-header">
+                                <a class="navbar-brand logo" href="#">{{header_title}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </template>
+
+    <!-- ===== PORTADA / HERO ===== -->
+    <template id="tpl-cover">
+        <section class="static-hero">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-xl-8 col-lg-6 col-12">
+                        <div class="wpo-static-hero-inner d-none"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="static-hero-right">
+                <div class="static-hero-img">
+                    <div class="static-hero-img-inner">
+                        <img src="{{img}}" alt="{{name}}">
+                    </div>
+                    <div class="static-hero-shape"><img src="assets/images/slider/shape.png" alt=""></div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-xl-8 col-lg-6 col-12">
+                        <div class="wpo-static-hero-inner">
+                            <div data-swiper-parallax="300" class="slide-title">
+                                <h1>{{desc}}</h1>
+                            </div>
+                            <div data-swiper-parallax="300" class="slide-title-2">
+                                <h2>{{name}}</h2>
+                            </div>
+                            <div data-swiper-parallax="400" class="slide-text">
+                                <p>{{date_text}}</p>
+                            </div>
+                            <div class="wpo-wedding-date">
+                                <div class="clock-grids">
+                                    <div id="clock-dinamico"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <!-- ===== TITULOS DE SECCION ===== -->
+    <template id="tpl-section-title">
+        <div class="wpo-section-title {{wrapper_class}}">
+            <span class="{{span_class}}">{{title}}</span>
+            <h2 class="{{h_class}}">{{desc}}</h2>
+        </div>
+    </template>
+
+    <template id="tpl-section-title-hero">
+        <div class="wpo-section-title {{wrapper_class}}">
+            <span class="{{span_class}}">{{title}}</span>
+            <h1 class="{{h_class}}">{{desc}}</h1>
+        </div>
+    </template>
+
+    <template id="tpl-section-title-icon">
+        <div class="wpo-section-title {{wrapper_class}}">
+            <span><i class="{{icon}} font-size-xxl"></i></span>
+            <h2 class="{{h_class}}">{{desc}}</h2>
+        </div>
+    </template>
+
+    <!-- ===== HISTORIA ===== -->
+    <template id="tpl-story">
+        <section class="wpo-story-section section-padding section-content" id="{{section_id}}">
+            <div class="container">
+                {{{section_title}}}
+                <div class="wpo-story-wrap">{{{items}}}</div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-story-item">
+        <div class="wpo-story-item">
+            <div class="wpo-story-img-wrap wow {{anim_img}}" data-wow-duration="1700ms">
+                <div class="wpo-story-img">
+                    <img src="{{img}}" alt="{{title}}">
+                </div>
+                <div class="wpo-img-shape">
+                    <img src="{{shape}}" alt="">
+                </div>
+            </div>
+            <div class="wpo-story-content">
+                <div class="wpo-story-content-inner wow {{anim_text}}" data-wow-duration="1700ms">
+                    <h2>{{title}}</h2>
+                    <p>{{desc}}</p>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- ===== UBICACIONES / HOSPEDAJE ===== -->
+    <template id="tpl-places">
+        <section class="wpo-event-section section-padding section-content" id="{{section_id}}">
+            <div class="container">
+                {{{section_title}}}
+                <div class="wpo-event-wrap">
+                    <div class="row">{{{items}}}</div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-places-item">
+        <div class="col col-12">
+            <div class="wpo-event-item wow fadeInUp" data-wow-duration="1200ms">
+                <div class="wpo-event-img">
+                    <div class="wpo-event-img-inner">
+                        <img src="{{img}}" alt="{{title}}">
+                    </div>
+                </div>
+                <div class="wpo-event-text">
+                    <div class="title">
+                        <h2>{{title}}</h2>
+                    </div>
+                    <ul>{{{details}}}</ul>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="tpl-li-text">
+        <li>{{text}}</li>
+    </template>
+
+    <template id="tpl-li-icon-text">
+        <li><i class="{{icon}} font-size-xl"></i> {{text}}</li>
+    </template>
+
+    <template id="tpl-li-link">
+        <li><a href="{{url}}" target="_blank" rel="noopener noreferrer">{{text}}</a></li>
+    </template>
+
+    <!-- ===== ITINERARIO ===== -->
+    <template id="tpl-itinerary">
+        <section class="wpo-event-section wpo-itinerary-section section-padding section-content" id="itinerary">
+            <div class="container">
+                {{{section_title}}}
+                <div class="row justify-content-center">
+                    <div class="col col-lg-8 col-md-10 col-12">
+                        <ul class="wpo-itinerary-list">{{{items}}}</ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-itinerary-item">
+        <li class="wpo-itinerary-item wow fadeInUp" data-wow-duration="1000ms">
+            <span class="wpo-itinerary-icon"><i class="{{icon}}"></i></span>
+            <span class="wpo-itinerary-body">
+                <span class="wpo-itinerary-hour">{{hour}}</span>
+                <span class="wpo-itinerary-title">{{title}}</span>
+                <span class="wpo-itinerary-desc {{desc_class}}">{{desc}}</span>
+            </span>
+        </li>
+    </template>
+
+    <!-- ===== DETALLES / CODIGO DE VESTIMENTA ===== -->
+    <template id="tpl-details">
+        <section class="wpo-event-section section-padding section-content" id="dresscode">
+            <div class="container">
+                <div class="wpo-event-wrap">
+                    <div class="row justify-content-center">
+                        <div class="col col-lg-8 col-md-10 col-12">
+                            <div class="wpo-event-item wow fadeInUp" data-wow-duration="1200ms">
+                                <div class="wpo-event-text dress-code text-center">
+                                    {{{section_title}}}
+                                    {{{blocks}}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-details-block">
+        <div class="wpo-team-text wpo-details-block">
+            <strong>{{title}}</strong>
+            <span class="{{desc_class}}">{{{desc}}}</span>
+        </div>
+    </template>
+
+    <!-- ===== RSVP ===== -->
+    <template id="tpl-rsvp">
+        <section class="wpo-contact-section section-padding section-content-parallaxeable" data-bg="{{bg}}" id="RSVP">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col col-lg-12 col-md-12 col-12">
+                        <div class="wpo-contact-section-wrapper">
+                            <div class="wpo-contact-section-inner">
+                                <div class="wpo-contact-form-area">
+                                    <div class="wpo-contact-title">
+                                        <h2>{{title}}</h2>
+                                        <p>{{desc}}</p>
+                                    </div>
+                                    <form class="contact-validation-active" id="contact-form-main" novalidate>
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-12">
+                                                {{{name_field}}}
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12 col-12">
+                                                <div class="radio-buttons">
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-6 col-12">
+                                                            <p>
+                                                                <input type="radio" id="attend" name="asistencia" value="Sí asistiré" checked>
+                                                                <label for="attend">Sí, estaré allí</label>
+                                                            </p>
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6 col-12">
+                                                            <p>
+                                                                <input type="radio" id="not" name="asistencia" value="No asistiré">
+                                                                <label for="not">Lo siento, no puedo asistir</label>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-12 col-md-12 col-12">
+                                                <select name="guest" class="form-control" id="guest" required>
+                                                    <option disabled="disabled" selected>Número de invitados</option>
+                                                    {{{guest_options}}}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="submit-area">
+                                            <button type="submit" class="theme-btn">Enviar confirmación</button>
+                                            <div id="c-loader">
+                                                <i class="ti-reload"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix error-handling-messages">
+                                            <div id="success">¡Gracias por confirmar!</div>
+                                            <div id="warning" class="warnin-confirmation-msg">Por favor, selecciona el número de invitados.</div>
+                                            <div id="error">Ocurrió un error al enviar el mensaje.</div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-rsvp-name-open">
+        <input type="text" class="form-control" name="name" id="name" placeholder="Nombre / familia" maxlength="80" required>
+    </template>
+
+    <template id="tpl-rsvp-name-fixed">
+        <input type="text" class="form-control wpo-readonly" name="name" id="name" value="{{name}}" readonly>
+    </template>
+
+    <!-- ===== REGALOS ===== -->
+    <template id="tpl-gift">
+        <section class="wpo-event-section section-padding section-content" id="gifts">
+            <div class="container">
+                {{{section_title}}}
+                <div class="row justify-content-center {{desc_class}}">
+                    <div class="col col-lg-8 col-md-10 col-12">
+                        <p class="text-center gift-description">{{desc}}</p>
+                    </div>
+                </div>
+                <div class="wpo-event-wrap">
+                    <div class="row justify-content-center">{{{items}}}</div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-gift-item">
+        <div class="col col-lg-8 col-md-10 col-12">
+            <div class="wpo-event-item wow fadeInUp" data-wow-duration="1200ms">
+                <div class="wpo-section-title">
+                    <span><i class="{{icon}} font-size-xxl"></i></span>
+                    <h2 class="padding-bottom-32">{{title}}</h2>
+                </div>
+                <div class="wpo-event-text text-center">{{{body}}}</div>
+            </div>
+        </div>
+    </template>
+
+    <!-- ===== PERSONAS (padres) ===== -->
+    <template id="tpl-people">
+        <section class="wpo-team-section pt-0 section-padding section-content" id="{{section_id}}">
+            <div class="container">
+                {{{section_title}}}
+                <div class="wpo-team-wrap">
+                    <div class="row justify-content-center">{{{items}}}</div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-people-item">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+            <div class="wpo-team-item wow fadeInUp" data-wow-duration="1200ms">
+                <div class="wpo-team-text">
+                    <h4>{{name}}</h4>
+                    <span class="{{role_class}}">{{role}}</span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- ===== LISTA DE NOMBRES (padrinos / chambelanes) ===== -->
+    <template id="tpl-names">
+        <section class="wpo-team-section pt-0 section-padding section-content" id="{{section_id}}">
+            <div class="container">
+                {{{section_title}}}
+                <div class="row justify-content-center">
+                    <div class="col col-lg-8 col-md-10 col-12">
+                        <div class="wpo-names-list text-center">{{{names}}}</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-name-line">
+        <p class="wpo-name-line">{{name}}</p>
+    </template>
+
+    <template id="tpl-name-spacer">
+        <p class="wpo-name-line wpo-name-spacer">&nbsp;</p>
+    </template>
+
+    <!-- ===== CTA (parallax) ===== -->
+    <template id="tpl-cta">
+        <div class="wpo-cta-section section-content section-content-parallaxeable" data-bg="{{img}}">
+            <div class="wpo-cta-item">
+                <h2>{{title}}</h2>
+                <p>{{desc}}</p>
+            </div>
+        </div>
+    </template>
+
+    <!-- ===== REDES SOCIALES ===== -->
+    <template id="tpl-social">
+        <section class="wpo-event-section wpo-social-section section-padding section-content" id="social">
+            <div class="container">
+                {{{section_title}}}
+                <div class="row justify-content-center">
+                    <div class="col col-lg-8 col-md-10 col-12">
+                        <div class="wpo-social-list">{{{items}}}</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-social-item">
+        <a class="wpo-social-item wow fadeInUp" data-wow-duration="1000ms" href="{{url}}" target="_blank" rel="noopener noreferrer">
+            <i class="{{icon}}"></i>
+            <span>{{title}}</span>
+        </a>
+    </template>
+
+    <!-- ===== SECCION GENERICA (HTML libre desde el admin) ===== -->
+    <template id="tpl-generic">
+        <section class="wpo-generic-section section-padding section-content" id="generic">
+            <div class="container">{{{html}}}</div>
+        </section>
+    </template>
+
+    <!-- ===== GALERIA ===== -->
+    <template id="tpl-gallery">
+        <section class="wpo-portfolio-section section-padding pt-0 section-content" id="gallery">
+            <h2 class="d-none">hidden</h2>
+            <div class="container">
+                {{{section_title}}}
+                <div class="sortable-gallery">
+                    <div class="gallery-filters"></div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="portfolio-grids gallery-container clearfix">{{{items}}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-gallery-item">
+        <div class="grid">
+            <div class="img-holder">
+                <a href="{{img}}" class="fancybox" data-fancybox-group="gall-1">
+                    <img src="{{img}}" alt="" class="img img-responsive">
+                    <div class="hover-content">
+                        <i class="ti-plus"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </template>
+
+
+    <!-- All JavaScript files
+    ================================================== -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/modernizr.custom.js"></script>
+    <script src="assets/js/jquery.dlmenu.js"></script>
+    <script src="assets/js/jquery-plugin-collection.js"></script>
+
+    <!--
+        IMPORTANTE: assets/js/script.js NO se carga aqui.
+        invitacion-dinamica.js lo inyecta DESPUES de pintar el DOM para que
+        fancybox / isotope / wow / sticky header se inicialicen sobre el
+        contenido ya renderizado.
+    -->
+    <script src="assets/js/invitacion-dinamica.js"></script>
+</body>
+
+</html>
